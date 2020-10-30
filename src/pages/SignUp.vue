@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import router from '../router';
 
 export default {
@@ -78,8 +78,21 @@ export default {
       }
 
       try {
-        await auth.createUserWithEmailAndPassword(this.email, this.password);
-        await auth.currentUser.updateProfile({ displayName: this.displayName });
+        const { user } = await auth.createUserWithEmailAndPassword(
+          this.email,
+          this.password
+        );
+
+        const userRef = db.doc(`users/${user.uid}`);
+        const snapShot = await userRef.get();
+
+        if (!snapShot.exists) {
+          await userRef.set({
+            displayName: this.displayName,
+            email: user.email
+          });
+        }
+
         router.push({ name: 'Home' });
       } catch (error) {
         this.feedback = error.message;

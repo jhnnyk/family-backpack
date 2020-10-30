@@ -1,3 +1,6 @@
+import { firestoreAction } from 'vuexfire';
+import { db } from '../../firebase';
+
 const state = {
   user: null
 };
@@ -13,9 +16,13 @@ const mutations = {
 };
 
 const actions = {
-  setUser: ({ commit }, user) => {
-    commit('setUser', user);
-  }
+  setUser: firestoreAction((context, user) => {
+    if (user) {
+      return context.bindFirestoreRef('user', db.doc(`users/${user.uid}`));
+    } else {
+      context.commit('setUser', null);
+    }
+  })
 };
 
 export default { state, getters, mutations, actions };
