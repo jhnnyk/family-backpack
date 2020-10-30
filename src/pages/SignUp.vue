@@ -33,6 +33,7 @@
 
 <script>
 import { auth } from '../firebase';
+import router from '../router';
 
 export default {
   name: 'SignUp',
@@ -47,6 +48,7 @@ export default {
     async signUp() {
       try {
         auth.createUserWithEmailAndPassword(this.email, this.password);
+        router.push({ name: 'Home' });
       } catch (error) {
         console.log(error);
       }

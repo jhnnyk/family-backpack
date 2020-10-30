@@ -27,6 +27,7 @@
 
 <script>
 import { auth } from '../firebase';
+import router from '../router';
 
 export default {
   name: 'SignIn',
@@ -40,6 +41,7 @@ export default {
     async signIn() {
       try {
         await auth.signInWithEmailAndPassword(this.email, this.password);
+        router.push({ name: 'Home' });
       } catch (error) {
         console.log(error);
       }

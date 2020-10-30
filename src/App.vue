@@ -7,12 +7,16 @@
 
 <script>
 import { auth } from './firebase';
+import { store } from './store/store';
+
 export default {
   name: 'App',
   created() {
     auth.onAuthStateChanged(function(user) {
       if (user) {
-        console.log(user);
+        store.dispatch('setUser', user);
+      } else {
+        store.dispatch('setUser', null);
       }
     });
   }
