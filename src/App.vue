@@ -6,8 +6,16 @@
 </template>
 
 <script>
+import { auth } from './firebase';
 export default {
-  name: 'App'
+  name: 'App',
+  created() {
+    auth.onAuthStateChanged(function(user) {
+      if (user) {
+        console.log(user);
+      }
+    });
+  }
 };
 </script>
 
