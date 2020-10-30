@@ -1,5 +1,6 @@
 <template>
-  <div class="signup">
+  <div class="signin-form">
+    <h2>Sign In</h2>
     <form>
       <label for="email">Email:</label>
       <input
@@ -17,15 +18,9 @@
         placeholder="enter password"
       />
 
-      <label for="password_confirmation">Confirm password:</label>
-      <input
-        type="password"
-        id="password_confirmation"
-        v-model="password_confirmation"
-        placeholder="please confirm your password"
-      />
-
-      <button type="button" @click="signUp">Sign up</button>
+      <button type="button" @click="signIn">
+        Sign in
+      </button>
     </form>
   </div>
 </template>
@@ -34,18 +29,17 @@
 import { auth } from '../firebase';
 
 export default {
-  name: 'SignUp',
+  name: 'SignIn',
   data() {
     return {
       email: '',
-      password: '',
-      password_confirmation: ''
+      password: ''
     };
   },
   methods: {
-    async signUp() {
+    async signIn() {
       try {
-        auth.createUserWithEmailAndPassword(this.email, this.password);
+        await auth.signInWithEmailAndPassword(this.email, this.password);
       } catch (error) {
         console.log(error);
       }

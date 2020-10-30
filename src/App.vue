@@ -1,18 +1,13 @@
 <template>
   <div id="app">
     <h1>Family Backpack</h1>
-    <SignUp />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import SignUp from './components/SignUp';
-
 export default {
-  name: 'App',
-  components: {
-    SignUp
-  }
+  name: 'App'
 };
 </script>
 
