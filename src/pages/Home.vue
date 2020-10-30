@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div v-if="getUser">
-      {{ getUser.email }} <br />
+      Hello {{ getUser.displayName }}! <br />
       <button type="button" @click="signOut">Sign Out</button>
     </div>
     <div v-else>

@@ -32,4 +32,23 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 50%;
+}
+
+input.danger {
+  border: 1px solid red;
+}
+
+p.feedback {
+  color: red;
+  margin: 5px 0 0 0;
+}
 </style>
