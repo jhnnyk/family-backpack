@@ -47,7 +47,7 @@ export default {
   methods: {
     async signUp() {
       try {
-        auth.createUserWithEmailAndPassword(this.email, this.password);
+        await auth.createUserWithEmailAndPassword(this.email, this.password);
         router.push({ name: 'Home' });
       } catch (error) {
         console.log(error);
