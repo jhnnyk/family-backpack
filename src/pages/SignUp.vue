@@ -61,7 +61,7 @@ export default {
       passwordConfirmation: '',
       hasPasswordError: false,
       hasEmailError: false,
-      feedback: ''
+      feedback: '',
     };
   },
   methods: {
@@ -70,6 +70,7 @@ export default {
       this.hasPasswordError = false;
       this.feedback = '';
     },
+
     async signUp() {
       if (this.password !== this.passwordConfirmation) {
         this.hasPasswordError = true;
@@ -89,7 +90,7 @@ export default {
         if (!snapShot.exists) {
           await userRef.set({
             displayName: this.displayName,
-            email: user.email
+            email: user.email,
           });
         }
 
@@ -113,7 +114,7 @@ export default {
             return;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
