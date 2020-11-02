@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Family Backpack</h1>
+    <TitleBar />
     <router-view></router-view>
   </div>
 </template>
@@ -9,8 +9,13 @@
 import { auth } from './firebase';
 import { store } from './store/store';
 
+import TitleBar from './components/TitleBar';
+
 export default {
   name: 'App',
+  components: {
+    TitleBar
+  },
   created() {
     auth.onAuthStateChanged(function(user) {
       if (user) {
@@ -24,13 +29,15 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 form {

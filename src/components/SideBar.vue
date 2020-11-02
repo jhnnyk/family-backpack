@@ -1,10 +1,10 @@
 <template>
-  <div class="sidebar">
-    <h4>sidebar here</h4>
+  <nav class="sidebar">
+    <h3>Pages</h3>
     <ul v-for="(page, index) in getPages" :key="index">
       <li>{{ page.title }}</li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -21,3 +21,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.sidebar {
+  flex-grow: 1;
+}
+</style>
