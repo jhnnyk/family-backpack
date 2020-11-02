@@ -21,7 +21,6 @@ const actions = {
       context.bindFirestoreRef('user', db.doc(`users/${user.uid}`), {
         wait: true,
         serialize: doc => {
-          console.log(doc.id);
           return { id: doc.id, ...doc.data() };
         }
       });

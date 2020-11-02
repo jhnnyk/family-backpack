@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { store } from '../store/store';
+
 export default {
   name: 'NewPageButton',
   data() {
@@ -36,9 +38,10 @@ export default {
       this.newPageName = '';
     },
 
-    addPage() {
+    async addPage() {
       this.formVisible = false;
-      console.log('add page...');
+      await store.dispatch('createNewPage', this.newPageName);
+      this.newPageName = '';
     }
   }
 };
