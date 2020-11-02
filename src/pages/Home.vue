@@ -4,6 +4,7 @@
       Hello {{ getUser.displayName }}! <br />
       <button type="button" @click="signOut">Sign Out</button>
       <NewPageButton />
+      <SideBar />
     </div>
     <div v-else>
       <router-link to="/signin">Sign In</router-link>
@@ -18,11 +19,13 @@ import { mapGetters } from 'vuex';
 import { auth } from '../firebase';
 
 import NewPageButton from '../components/NewPageButton';
+import SideBar from '../components/SideBar';
 
 export default {
   name: 'Home',
   components: {
-    NewPageButton
+    NewPageButton,
+    SideBar
   },
   computed: {
     ...mapGetters(['getUser'])
