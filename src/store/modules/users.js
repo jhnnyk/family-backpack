@@ -18,7 +18,13 @@ const mutations = {
 const actions = {
   setUser: firestoreAction((context, user) => {
     if (user) {
-      return context.bindFirestoreRef('user', db.doc(`users/${user.uid}`));
+      context.bindFirestoreRef('user', db.doc(`users/${user.uid}`), {
+        wait: true,
+        serialize: doc => {
+          console.log(doc.id);
+          return { id: doc.id, ...doc.data() };
+        }
+      });
     } else {
       context.commit('setUser', null);
     }
