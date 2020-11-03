@@ -4,6 +4,7 @@
     <ul v-for="(page, index) in getPages" :key="index" class="page-list">
       <li @click="selectPage(page)">{{ page.title }}</li>
     </ul>
+    <NewPageButton />
   </nav>
 </template>
 
@@ -11,8 +12,13 @@
 import { store } from '../store/store';
 import { mapGetters } from 'vuex';
 
+import NewPageButton from '../components/NewPageButton';
+
 export default {
   name: 'SideBar',
+  components: {
+    NewPageButton
+  },
   computed: {
     ...mapGetters(['getPages'])
   },
