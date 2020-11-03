@@ -1,8 +1,14 @@
 <template>
   <nav class="sidebar">
     <h3>Pages</h3>
-    <ul v-for="(page, index) in getPages" :key="index" class="page-list">
-      <li @click="selectPage(page)">{{ page.title }}</li>
+    <ul class="page-list">
+      <li
+        v-for="(page, index) in getPages"
+        :key="index"
+        @click="selectPage(page)"
+      >
+        {{ page.title }}
+      </li>
     </ul>
     <AddNewPage />
   </nav>
