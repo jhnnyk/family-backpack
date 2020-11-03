@@ -44,9 +44,20 @@ export default {
         task.completed = 0;
         await store.dispatch('updateTask', task);
       } else {
-        task.completed = Date.now();
+        task.completed = new Date().getDate();
         await store.dispatch('updateTask', task);
       }
+    }
+  },
+  watch: {
+    getPageTasks() {
+      const todaysDate = new Date().getDate();
+
+      this.getPageTasks.forEach(task => {
+        if (task.completed !== 0 && task.completed !== todaysDate) {
+          this.toggleTaskComplete(task);
+        }
+      });
     }
   }
 };
