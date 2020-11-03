@@ -1,9 +1,9 @@
 <template>
-  <div class="new-page-button">
-    <button type="button" v-if="formVisible === false" @click="showForm">
+  <div class="add-new-page">
+    <button type="button" v-if="!formVisible" @click="showForm">
       add new page
     </button>
-    <form v-if="formVisible === true">
+    <form v-if="formVisible">
       <label for="page-name">Page Name:</label>
       <input
         type="text"
@@ -29,7 +29,7 @@
 import { store } from '../store/store';
 
 export default {
-  name: 'NewPageButton',
+  name: 'AddNewPage',
   data() {
     return {
       formVisible: false,
