@@ -9,6 +9,8 @@
             type="checkbox"
             :name="`task-${index}`"
             :id="`task-${index}`"
+            :checked="!!task.completed"
+            @click="toggleTaskComplete(task)"
           />
           <label :for="`task-${index}`">{{ task.content }}</label>
         </li>
@@ -23,6 +25,7 @@
 </template>
 
 <script>
+import { store } from '../store/store';
 import { mapGetters } from 'vuex';
 
 import AddNewTask from '../components/AddNewTask';
@@ -34,6 +37,17 @@ export default {
   },
   computed: {
     ...mapGetters(['getSelectedPage', 'getPageTasks'])
+  },
+  methods: {
+    async toggleTaskComplete(task) {
+      if (task.completed) {
+        task.completed = 0;
+        await store.dispatch('updateTask', task);
+      } else {
+        task.completed = Date.now();
+        await store.dispatch('updateTask', task);
+      }
+    }
   }
 };
 </script>

@@ -40,6 +40,20 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  updateTask: ({ rootState }, task) => {
+    try {
+      db.collection('pages')
+        .doc(rootState.pages.selectedPage.id)
+        .collection('tasks')
+        .doc(task.id)
+        .update({
+          ...task
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
