@@ -29,5 +29,10 @@ export default {
 .home {
   display: flex;
   flex-direction: row;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.02);
+  border-radius: 6px;
+  margin: 5vw;
+  background-color: #fff;
 }
 </style>

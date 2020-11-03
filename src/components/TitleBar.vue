@@ -41,5 +41,6 @@ header {
   justify-content: space-between;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
   padding: 0 20px;
+  background-color: #fff;
 }
 </style>
