@@ -35,7 +35,6 @@ export default {
 
 <style>
 .sidebar {
-  background-color: white;
   flex-grow: 1;
   padding: 20px;
 }

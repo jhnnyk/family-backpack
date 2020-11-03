@@ -36,12 +36,10 @@ export default {
 
 <style scoped>
 header {
-  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  box-shadow: 0 8px 6px -6px #ccc;
-  margin: 0 -10px 10px -10px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
   padding: 0 20px;
 }
 </style>
