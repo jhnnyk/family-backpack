@@ -27,11 +27,12 @@ const actions = {
     );
   }),
 
-  createNewPage: ({ rootState }, newPageName) => {
+  createNewPage: ({ rootState }, newPage) => {
     try {
       db.collection('pages').add({
         owner: rootState.users.user.id,
-        title: newPageName
+        title: newPage.title,
+        type: newPage.type
       });
     } catch (error) {
       console.log(error);

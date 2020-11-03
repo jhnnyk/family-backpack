@@ -9,8 +9,16 @@
         type="text"
         name="page-name"
         id="page-name"
-        v-model="newPageName"
+        v-model="newPageTitle"
       />
+
+      <label for="page-type">Page type:</label>
+      <select name="page-type" id="page-type" v-model="newPageType">
+        <option disabled value="">Please select one</option>
+        <option value="todo-list">To Do List</option>
+        <option value="daily-chores">Daily Chore List</option>
+      </select>
+
       <button type="button" @click="addPage">Submit</button>
       <button type="button" @click="cancelAddPage">Cancel</button>
     </form>
@@ -25,7 +33,8 @@ export default {
   data() {
     return {
       formVisible: false,
-      newPageName: ''
+      newPageTitle: '',
+      newPageType: ''
     };
   },
   methods: {
@@ -35,13 +44,19 @@ export default {
 
     cancelAddPage() {
       this.formVisible = false;
-      this.newPageName = '';
+      this.newPageTitle = '';
+      this.newPageType = '';
     },
 
     async addPage() {
+      const newPage = {
+        title: this.newPageTitle,
+        type: this.newPageType
+      };
       this.formVisible = false;
-      await store.dispatch('createNewPage', this.newPageName);
-      this.newPageName = '';
+      await store.dispatch('createNewPage', newPage);
+      this.newPageTitle = '';
+      this.newPageType = '';
     }
   }
 };
