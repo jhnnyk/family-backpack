@@ -45,8 +45,9 @@ const actions = {
     }
   },
 
-  selectPage: ({ commit }, page) => {
-    commit('selectPage', page);
+  selectPage: async ({ dispatch, commit }, page) => {
+    await commit('selectPage', page);
+    dispatch('setTasksRef', page);
   }
 };
 

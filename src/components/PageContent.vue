@@ -2,6 +2,11 @@
   <main class="page-content">
     <div v-if="getSelectedPage">
       <h1>{{ getSelectedPage.title }}</h1>
+
+      <ul v-for="(task, index) in getPageTasks" :key="index">
+        <li>{{ task.content }}</li>
+      </ul>
+
       <AddNewTask />
     </div>
     <div v-else>
@@ -21,7 +26,7 @@ export default {
     AddNewTask
   },
   computed: {
-    ...mapGetters(['getSelectedPage'])
+    ...mapGetters(['getSelectedPage', 'getPageTasks'])
   }
 };
 </script>
