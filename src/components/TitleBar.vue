@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Family Backpack</h1>
+    <h1>Fubby</h1>
     <div v-if="getUser">
       Hello {{ getUser.displayName }}! <br />
       <button type="button" @click="signOut">Sign Out</button>
