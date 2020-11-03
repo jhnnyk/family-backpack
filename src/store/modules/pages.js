@@ -19,11 +19,17 @@ const mutations = {
 
 const actions = {
   setPagesRef: firestoreAction(context => {
-    return context.bindFirestoreRef(
+    context.bindFirestoreRef(
       'pages',
       db
         .collection('pages')
-        .where('owner', '==', context.rootState.users.user.id)
+        .where('owner', '==', context.rootState.users.user.id),
+      {
+        wait: true,
+        serialize: doc => {
+          return { id: doc.id, ...doc.data() };
+        }
+      }
     );
   }),
 
