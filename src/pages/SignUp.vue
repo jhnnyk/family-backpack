@@ -2,15 +2,16 @@
   <div class="signup-form container">
     <h2>Sign Up</h2>
     <form>
-      <label for="display_name">Display Name:</label>
+      <label for="display_name">Display Name: </label>
       <input
         type="text"
         v-model="displayName"
         id="display_name"
         placeholder="enter display name"
         @focus="clearErrorMessage"
-      />
-      <label for="email">Email:</label>
+      /><br />
+
+      <label for="email">Email: </label>
       <input
         type="email"
         id="email"
@@ -18,9 +19,9 @@
         placeholder="enter email"
         v-bind:class="{ danger: hasEmailError }"
         @focus="clearErrorMessage"
-      />
+      /><br />
 
-      <label for="password">Password:</label>
+      <label for="password">Password: </label>
       <input
         type="password"
         id="password"
@@ -28,9 +29,9 @@
         placeholder="enter password"
         v-bind:class="{ danger: hasPasswordError }"
         @focus="clearErrorMessage"
-      />
+      /><br />
 
-      <label for="password-confirmation">Confirm password:</label>
+      <label for="password-confirmation">Confirm password: </label>
       <input
         type="password"
         id="password-confirmation"
@@ -38,7 +39,7 @@
         placeholder="please confirm your password"
         v-bind:class="{ danger: hasPasswordError }"
         @focus="clearErrorMessage"
-      />
+      /><br />
 
       <p class="feedback">{{ feedback }}</p>
 

@@ -44,6 +44,14 @@ export default {
   flex-grow: 1;
 }
 
+.page-list {
+  margin: 15px 0;
+}
+
+.page-list li {
+  list-style-type: none;
+}
+
 .page-list li:hover {
   cursor: pointer;
 }

@@ -34,6 +34,12 @@ body {
   background-color: #f2f6fa;
 }
 
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -48,16 +54,6 @@ body {
   margin: 5vw;
   background-color: #fff;
   padding: 3vw;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-input {
-  width: 50%;
 }
 
 input.danger {

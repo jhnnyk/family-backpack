@@ -2,7 +2,7 @@
   <div class="signin-form container">
     <h2>Sign In</h2>
     <form>
-      <label for="email">Email:</label>
+      <label for="email">Email: </label>
       <input
         type="email"
         id="email"
@@ -10,9 +10,9 @@
         placeholder="enter email"
         v-bind:class="{ danger: hasEmailError }"
         @focus="clearErrorMessage"
-      />
+      /><br />
 
-      <label for="password">Password:</label>
+      <label for="password">Password: </label>
       <input
         type="password"
         id="password"

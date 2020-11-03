@@ -3,7 +3,7 @@
     <div v-if="getSelectedPage">
       <h1>{{ getSelectedPage.title }}</h1>
 
-      <ul>
+      <ul class="task-list">
         <li v-for="(task, index) in getPageTasks" :key="index">
           <input
             type="checkbox"
@@ -67,5 +67,9 @@ export default {
 .page-content {
   flex-grow: 3;
   padding-left: 3vw;
+}
+
+.task-list li {
+  list-style-type: none;
 }
 </style>

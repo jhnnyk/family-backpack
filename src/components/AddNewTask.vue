@@ -8,7 +8,8 @@
         type="text"
         v-model="taskContent"
         placeholder="please enter a new task"
-      />
+      /><br />
+
       <button type="button" @click="addNewTask">Submit</button>
       <button type="button" @click="cancelAddTask">Cancel</button>
     </form>
