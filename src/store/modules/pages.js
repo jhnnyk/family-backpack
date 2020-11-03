@@ -2,14 +2,20 @@ import { firestoreAction } from 'vuexfire';
 import { db } from '../../firebase';
 
 const state = {
-  pages: []
+  pages: [],
+  selectedPage: null
 };
 
 const getters = {
-  getPages: state => state.pages
+  getPages: state => state.pages,
+  getSelectedPage: state => state.selectedPage
 };
 
-const mutations = {};
+const mutations = {
+  selectPage: (state, page) => {
+    state.selectedPage = page;
+  }
+};
 
 const actions = {
   setPagesRef: firestoreAction(context => {
@@ -30,6 +36,10 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  selectPage: ({ commit }, page) => {
+    commit('selectPage', page);
   }
 };
 
