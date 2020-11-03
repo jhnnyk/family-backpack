@@ -20,5 +20,6 @@ export default {
 .page-content {
   flex-grow: 3;
   background-color: #ccc;
+  padding: 20px;
 }
 </style>
