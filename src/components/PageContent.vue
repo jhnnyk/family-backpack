@@ -3,8 +3,15 @@
     <div v-if="getSelectedPage">
       <h1>{{ getSelectedPage.title }}</h1>
 
-      <ul v-for="(task, index) in getPageTasks" :key="index">
-        <li>{{ task.content }}</li>
+      <ul>
+        <li v-for="(task, index) in getPageTasks" :key="index">
+          <input
+            type="checkbox"
+            :name="`task-${index}`"
+            :id="`task-${index}`"
+          />
+          <label :for="`task-${index}`">{{ task.content }}</label>
+        </li>
       </ul>
 
       <AddNewTask />
