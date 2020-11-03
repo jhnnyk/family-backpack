@@ -1,5 +1,5 @@
 <template>
-  <div class="signup-form">
+  <div class="signup-form container">
     <h2>Sign Up</h2>
     <form>
       <label for="display_name">Display Name:</label>
@@ -61,7 +61,7 @@ export default {
       passwordConfirmation: '',
       hasPasswordError: false,
       hasEmailError: false,
-      feedback: '',
+      feedback: ''
     };
   },
   methods: {
@@ -90,7 +90,7 @@ export default {
         if (!snapShot.exists) {
           await userRef.set({
             displayName: this.displayName,
-            email: user.email,
+            email: user.email
           });
         }
 
@@ -114,7 +114,7 @@ export default {
             return;
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>

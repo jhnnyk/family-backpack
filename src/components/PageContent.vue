@@ -19,6 +19,6 @@ export default {
 <style>
 .page-content {
   flex-grow: 3;
-  padding: 20px;
+  padding-left: 3vw;
 }
 </style>

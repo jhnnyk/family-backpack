@@ -36,7 +36,6 @@ export default {
 <style>
 .sidebar {
   flex-grow: 1;
-  padding: 20px;
 }
 
 .page-list li:hover {
