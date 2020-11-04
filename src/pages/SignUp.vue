@@ -5,9 +5,10 @@
       <label for="display_name">Display Name: </label>
       <input
         type="text"
-        v-model="displayName"
         id="display_name"
+        v-model="displayName"
         placeholder="enter display name"
+        :class="{ danger: hasDisplayNameError }"
         @focus="clearErrorMessage"
       /><br />
 
@@ -62,6 +63,7 @@ export default {
       passwordConfirmation: '',
       hasPasswordError: false,
       hasEmailError: false,
+      hasDisplayNameError: false,
       feedback: ''
     };
   },
@@ -69,6 +71,7 @@ export default {
     clearErrorMessage() {
       this.hasEmailError = false;
       this.hasPasswordError = false;
+      this.hasDisplayNameError = false;
       this.feedback = '';
     },
 
@@ -76,6 +79,12 @@ export default {
       if (this.password !== this.passwordConfirmation) {
         this.hasPasswordError = true;
         this.feedback = 'Passwords must match';
+        return;
+      }
+
+      if (!this.displayName) {
+        this.hasDisplayNameError = true;
+        this.feedback = 'Display Name is required';
         return;
       }
 
