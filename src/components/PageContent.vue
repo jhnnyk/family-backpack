@@ -2,6 +2,9 @@
   <main class="page-content">
     <div v-if="getSelectedPage">
       <h1>{{ getSelectedPage.title }}</h1>
+      <p v-if="getSelectedPage.type === 'daily-chores'">
+        this is a Daily Chore page. all tasks will be reset each day
+      </p>
 
       <ul class="task-list">
         <li v-for="(task, index) in getPageTasks" :key="index">
@@ -51,13 +54,16 @@ export default {
   },
   watch: {
     getPageTasks() {
-      const todaysDate = new Date().getDate();
+      // reset tasks daily on Daily Chore pages
+      if (this.getSelectedPage.type === 'daily-chores') {
+        const todaysDate = new Date().getDate();
 
-      this.getPageTasks.forEach(task => {
-        if (task.completed !== 0 && task.completed !== todaysDate) {
-          this.toggleTaskComplete(task);
-        }
-      });
+        this.getPageTasks.forEach(task => {
+          if (task.completed !== 0 && task.completed !== todaysDate) {
+            this.toggleTaskComplete(task);
+          }
+        });
+      }
     }
   }
 };
