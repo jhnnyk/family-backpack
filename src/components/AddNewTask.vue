@@ -6,9 +6,14 @@
     <form v-if="formVisible" @submit.prevent @keydown.enter="addNewTask">
       <input
         type="text"
+        id="task-content"
         v-model="taskContent"
         placeholder="please enter a new task"
-      /><br />
+        :class="{ danger: hasTaskContentError }"
+        @focus="clearErrorMessage"
+      />
+
+      <p class="feedback">{{ feedback }}</p>
 
       <button type="button" @click="addNewTask">Submit</button>
       <button type="button" @click="cancelAddTask">Cancel</button>
@@ -24,7 +29,9 @@ export default {
   data() {
     return {
       formVisible: false,
-      taskContent: ''
+      taskContent: '',
+      hasTaskContentError: false,
+      feedback: ''
     };
   },
   methods: {
@@ -32,18 +39,30 @@ export default {
       this.formVisible = true;
     },
 
+    cancelAddTask() {
+      this.formVisible = false;
+      this.taskContent = '';
+      this.clearErrorMessage();
+    },
+
+    clearErrorMessage() {
+      this.hasTaskContentError = false;
+      this.feedback = '';
+    },
+
     async addNewTask() {
+      if (!this.taskContent) {
+        this.hasTaskContentError = true;
+        this.feedback = 'Task cannot be blank.';
+        return;
+      }
+
       const newTask = {
         content: this.taskContent
       };
 
       this.formVisible = false;
       await store.dispatch('addTask', newTask);
-      this.taskContent = '';
-    },
-
-    cancelAddTask() {
-      this.formVisible = false;
       this.taskContent = '';
     }
   }
