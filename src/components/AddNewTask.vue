@@ -3,7 +3,7 @@
     <button type="button" v-if="!formVisible" @click="showForm">
       <i class="material-icons">add_circle</i> add task
     </button>
-    <form v-if="formVisible">
+    <form v-if="formVisible" @submit.prevent @keydown.enter="addNewTask">
       <input
         type="text"
         v-model="taskContent"

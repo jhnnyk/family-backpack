@@ -1,7 +1,7 @@
 <template>
   <div class="signin-form container">
     <h2>Sign In</h2>
-    <form>
+    <form @keydown.enter="signIn">
       <label for="email">Email: </label>
       <input
         type="email"

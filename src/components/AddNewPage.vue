@@ -3,7 +3,7 @@
     <button type="button" v-if="!formVisible" @click="showForm">
       add new page
     </button>
-    <form v-if="formVisible">
+    <form v-if="formVisible" @submit.prevent @keydown.enter="addPage">
       <label for="page-name">Page Name: </label>
       <input
         type="text"
