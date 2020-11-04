@@ -56,7 +56,7 @@ li {
   padding: 3vw;
 }
 
-input.danger {
+.danger {
   border: 1px solid red;
 }
 
