@@ -17,7 +17,7 @@
         id="email"
         v-model="email"
         placeholder="enter email"
-        v-bind:class="{ danger: hasEmailError }"
+        :class="{ danger: hasEmailError }"
         @focus="clearErrorMessage"
       /><br />
 
@@ -27,7 +27,7 @@
         id="password"
         v-model="password"
         placeholder="enter password"
-        v-bind:class="{ danger: hasPasswordError }"
+        :class="{ danger: hasPasswordError }"
         @focus="clearErrorMessage"
       /><br />
 
@@ -37,7 +37,7 @@
         id="password-confirmation"
         v-model="passwordConfirmation"
         placeholder="please confirm your password"
-        v-bind:class="{ danger: hasPasswordError }"
+        :class="{ danger: hasPasswordError }"
         @focus="clearErrorMessage"
       /><br />
 
