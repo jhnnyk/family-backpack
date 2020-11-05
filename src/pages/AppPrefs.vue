@@ -11,6 +11,7 @@
       />
       <button type="button" @click="findUser">Search for user</button>
     </form>
+    <p v-if="loading">loading...</p>
   </div>
 </template>
 
@@ -23,12 +24,15 @@ export default {
   name: 'AppPrefs',
   data() {
     return {
+      loading: false,
       inviteUserEmail: ''
     };
   },
   methods: {
     async findUser() {
+      this.loading = true;
       const result = await findUserByEmail({ email: this.inviteUserEmail });
+      this.loading = false;
       console.log(result.data);
     }
   }
