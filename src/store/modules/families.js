@@ -37,7 +37,7 @@ const actions = {
     try {
       db.collection('families').add({
         members: [rootState.users.user.id],
-        parents: [rootState.users.user],
+        parents: [rootState.users.user.id],
         name: familyName
       });
     } catch (error) {
