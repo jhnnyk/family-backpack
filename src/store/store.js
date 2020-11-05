@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import users from './modules/users';
 import pages from './modules/pages';
 import tasks from './modules/tasks';
+import families from './modules/families';
 
 import { vuexfireMutations } from 'vuexfire';
 
@@ -14,6 +15,7 @@ export const store = new Vuex.Store({
   modules: {
     users,
     pages,
-    tasks
+    tasks,
+    families
   }
 });

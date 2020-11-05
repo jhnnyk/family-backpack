@@ -1,6 +1,26 @@
 <template>
   <div class="app-prefs container">
     <h1>Settings</h1>
+    <hr />
+    <h3>Create Family</h3>
+    <form @submit.prevent>
+      <input
+        type="text"
+        name="family-name"
+        id="family-name"
+        placeholder="enter family name"
+        v-model="newFamilyName"
+        :class="{ danger: hasFamilyNameError }"
+        @focus="clearErrorMessage"
+      />
+
+      <p class="feedback">{{ feedback }}</p>
+
+      <button type="button" @click="createNewFamily">Create family</button>
+    </form>
+    <hr />
+    <h3>Search for user by email</h3>
+    <p>this doesn't really serve a purpose right now -- just testing</p>
     <form @submit.prevent>
       <input
         type="email"
@@ -17,6 +37,7 @@
 
 <script>
 import { firebaseFunc } from '../firebase';
+import { store } from '../store/store';
 
 const findUserByEmail = firebaseFunc.httpsCallable('findUserByEmail');
 
@@ -24,11 +45,29 @@ export default {
   name: 'AppPrefs',
   data() {
     return {
+      newFamilyName: '',
+      hasFamilyNameError: false,
+      feedback: '',
       loading: false,
       inviteUserEmail: ''
     };
   },
   methods: {
+    clearErrorMessage() {
+      this.hasFamilyNameError = false;
+      this.feedback = '';
+    },
+
+    async createNewFamily() {
+      if (!this.newFamilyName) {
+        this.hasFamilyNameError = true;
+        this.feedback = 'You must enter a name for your family';
+        return;
+      }
+
+      await store.dispatch('createNewFamily', this.newFamilyName);
+    },
+
     async findUser() {
       this.loading = true;
       const result = await findUserByEmail({ email: this.inviteUserEmail });
