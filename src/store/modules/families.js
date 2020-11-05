@@ -5,19 +5,25 @@ const state = {
   family: null
 };
 
-const getters = {};
+const getters = {
+  getFamily: state => {
+    if (state.family) {
+      return state.family[0];
+    } else {
+      return null;
+    }
+  }
+};
 
 const mutations = {};
 
 const actions = {
-  setFamilyRef: firestoreAction(context => {
+  setFamilyRef: firestoreAction((context, user) => {
     context.bindFirestoreRef(
       'family',
       db
         .collection('families')
-        .where('members', 'array-contains-any', [
-          context.rootState.users.user.id
-        ]),
+        .where('members', 'array-contains-any', [user.uid]),
       {
         wait: true,
         serialize: doc => {
@@ -30,6 +36,7 @@ const actions = {
   createNewFamily: ({ rootState }, familyName) => {
     try {
       db.collection('families').add({
+        members: [rootState.users.user.id],
         parents: [rootState.users.user.id],
         name: familyName
       });

@@ -2,23 +2,30 @@
   <div class="app-prefs container">
     <h1>Settings</h1>
     <hr />
-    <h3>Create Family</h3>
-    <form @submit.prevent>
-      <input
-        type="text"
-        name="family-name"
-        id="family-name"
-        placeholder="enter family name"
-        v-model="newFamilyName"
-        :class="{ danger: hasFamilyNameError }"
-        @focus="clearErrorMessage"
-      />
+    <div class="family-info" v-if="getFamily">
+      <h3>{{ getFamily.name }}</h3>
+      <hr />
+    </div>
 
-      <p class="feedback">{{ feedback }}</p>
+    <div class="add-family" v-if="!getFamily">
+      <h3>Create Family</h3>
+      <form @submit.prevent>
+        <input
+          type="text"
+          name="family-name"
+          id="family-name"
+          placeholder="enter family name"
+          v-model="newFamilyName"
+          :class="{ danger: hasFamilyNameError }"
+          @focus="clearErrorMessage"
+        />
 
-      <button type="button" @click="createNewFamily">Create family</button>
-    </form>
-    <hr />
+        <p class="feedback">{{ feedback }}</p>
+
+        <button type="button" @click="createNewFamily">Create family</button>
+      </form>
+      <hr />
+    </div>
     <h3>Search for user by email</h3>
     <p>this doesn't really serve a purpose right now -- just testing</p>
     <form @submit.prevent>
@@ -36,6 +43,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { firebaseFunc } from '../firebase';
 import { store } from '../store/store';
 
@@ -51,6 +59,9 @@ export default {
       loading: false,
       inviteUserEmail: ''
     };
+  },
+  computed: {
+    ...mapGetters(['getFamily'])
   },
   methods: {
     clearErrorMessage() {

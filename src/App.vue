@@ -20,6 +20,7 @@ export default {
     auth.onAuthStateChanged(function(user) {
       if (user) {
         store.dispatch('setUser', user);
+        store.dispatch('setFamilyRef', user);
       } else {
         store.dispatch('setUser', null);
       }
