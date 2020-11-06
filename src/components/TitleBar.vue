@@ -19,6 +19,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { auth } from '../firebase';
+import router from '../router';
 
 export default {
   name: 'TitleBar',
@@ -29,6 +30,7 @@ export default {
     async signOut() {
       try {
         await auth.signOut();
+        router.push({ name: 'Home' });
       } catch (error) {
         console.log(error);
       }
