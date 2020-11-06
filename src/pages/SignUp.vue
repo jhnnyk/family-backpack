@@ -53,7 +53,9 @@
 import { auth, db, firebaseFunc } from '../firebase';
 import router from '../router';
 
-const addNewParent = firebaseFunc.httpsCallable('addNewParent');
+const createNewFamilyMemberAccount = firebaseFunc.httpsCallable(
+  'createNewFamilyMemberAccount'
+);
 
 export default {
   name: 'SignUp',
@@ -94,7 +96,7 @@ export default {
       }
 
       if (this.signUpType) {
-        this.signUpNewParent();
+        this.signUpNewFamilyMember();
       } else {
         this.signUpNewUser();
       }
@@ -131,15 +133,15 @@ export default {
       }
     },
 
-    async signUpNewParent() {
-      const newParent = {
+    async signUpNewFamilyMember() {
+      const newFamilyMember = {
         email: this.email,
         password: this.password,
         displayName: this.displayName
       };
 
       try {
-        const user = await addNewParent(newParent);
+        const user = await createNewFamilyMemberAccount(newFamilyMember);
         this.setUserDoc(user.data);
       } catch (error) {
         console.log(error);
