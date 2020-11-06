@@ -3,24 +3,30 @@
     <h1>Settings</h1>
     <hr />
     <div class="family-info" v-if="getFamily">
-      <h3>{{ getFamily.name }}</h3>
+      <h2><i class="material-icons">groups</i> {{ getFamily.name }}</h2>
+
       <p>Parents:</p>
       <ul>
         <li v-for="(parent, index) in getFamily.parents" :key="index">
           {{ parent.displayName }}
         </li>
       </ul>
+      <AddNewParent />
+
       <p>Children:</p>
       <ul>
         <li v-for="(child, index) in getFamily.children" :key="index">
           {{ child.displayName }}
         </li>
       </ul>
+      <button type="button">
+        <i class="material-icons">person_add</i> add child
+      </button>
       <hr />
     </div>
 
     <div class="add-family" v-if="!getFamily">
-      <h3>Create Family</h3>
+      <h2>Create Family</h2>
       <form @submit.prevent>
         <input
           type="text"
@@ -59,10 +65,15 @@ import { mapGetters } from 'vuex';
 import { firebaseFunc } from '../firebase';
 import { store } from '../store/store';
 
+import AddNewParent from '../components/AddNewParent';
+
 const findUserByEmail = firebaseFunc.httpsCallable('findUserByEmail');
 
 export default {
   name: 'AppPrefs',
+  components: {
+    AddNewParent
+  },
   data() {
     return {
       newFamilyName: '',

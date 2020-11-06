@@ -1,6 +1,6 @@
 <template>
   <div class="signup-form container">
-    <h2>Sign Up</h2>
+    <h2>{{ signUpType ? `Add New ${signUpType}` : 'Sign Up' }}</h2>
     <form @keydown.enter="signUp">
       <label for="display_name">Display Name: </label>
       <input
@@ -50,11 +50,16 @@
 </template>
 
 <script>
-import { auth, db } from '../firebase';
+import { auth, db, firebaseFunc } from '../firebase';
 import router from '../router';
+
+const addNewParent = firebaseFunc.httpsCallable('addNewParent');
 
 export default {
   name: 'SignUp',
+  props: {
+    signUpType: String
+  },
   data() {
     return {
       displayName: '',
@@ -75,7 +80,7 @@ export default {
       this.feedback = '';
     },
 
-    async signUp() {
+    signUp() {
       if (this.password !== this.passwordConfirmation) {
         this.hasPasswordError = true;
         this.feedback = 'Passwords must match';
@@ -88,6 +93,14 @@ export default {
         return;
       }
 
+      if (this.signUpType) {
+        this.signUpNewParent();
+      } else {
+        this.signUpNewUser();
+      }
+    },
+
+    async signUpNewUser() {
       try {
         const { user } = await auth.createUserWithEmailAndPassword(
           this.email,
@@ -124,6 +137,17 @@ export default {
             return;
         }
       }
+    },
+
+    async signUpNewParent() {
+      const newParent = {
+        email: this.email,
+        password: this.password,
+        displayName: this.displayName
+      };
+
+      const result = await addNewParent(newParent);
+      console.log(result.data);
     }
   }
 };

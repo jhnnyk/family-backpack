@@ -11,3 +11,17 @@ exports.findUserByEmail = functions.https.onCall(async (data, context) => {
     return error;
   }
 });
+
+// current user add new parent
+exports.addNewParent = functions.https.onCall(async (data, context) => {
+  try {
+    let userRecord = await admin.auth().createUser({
+      email: data.email,
+      password: data.password,
+      displayName: data.displayName
+    });
+    return userRecord.toJSON();
+  } catch (error) {
+    return error;
+  }
+});

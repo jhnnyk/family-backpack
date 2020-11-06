@@ -41,6 +41,15 @@ li {
   padding: 0;
 }
 
+button {
+  display: inline-flex;
+  align-items: center;
+}
+
+button .material-icons {
+  margin-right: 5px;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
