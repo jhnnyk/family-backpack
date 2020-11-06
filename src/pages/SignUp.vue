@@ -51,6 +51,7 @@
 
 <script>
 import { auth, db, firebaseFunc } from '../firebase';
+import { store } from '../store/store';
 import router from '../router';
 
 const createNewFamilyMemberAccount = firebaseFunc.httpsCallable(
@@ -143,6 +144,13 @@ export default {
       try {
         const user = await createNewFamilyMemberAccount(newFamilyMember);
         this.setUserDoc(user.data);
+        if (this.signUpType === 'Parent') {
+          store.dispatch('addParentToFamily', {
+            id: user.data.uid,
+            displayName: this.displayName,
+            email: user.data.email
+          });
+        }
       } catch (error) {
         console.log(error);
       }

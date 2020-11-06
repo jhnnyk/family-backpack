@@ -1,3 +1,4 @@
+import firebase from 'firebase/app';
 import { firestoreAction } from 'vuexfire';
 import { db } from '../../firebase';
 
@@ -40,6 +41,18 @@ const actions = {
         parents: [rootState.users.user],
         children: [],
         name: familyName
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  addParentToFamily: ({ state }, parent) => {
+    try {
+      const familyRef = db.collection('families').doc(state.family[0].id);
+      familyRef.update({
+        members: firebase.firestore.FieldValue.arrayUnion(parent.id),
+        parents: firebase.firestore.FieldValue.arrayUnion(parent)
       });
     } catch (error) {
       console.log(error);
