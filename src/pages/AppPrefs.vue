@@ -4,6 +4,18 @@
     <hr />
     <div class="family-info" v-if="getFamily">
       <h3>{{ getFamily.name }}</h3>
+      <p>Parents:</p>
+      <ul>
+        <li v-for="(parent, index) in getFamily.parents" :key="index">
+          {{ parent.displayName }}
+        </li>
+      </ul>
+      <p>Children:</p>
+      <ul>
+        <li v-for="(child, index) in getFamily.children" :key="index">
+          {{ child.displayName }}
+        </li>
+      </ul>
       <hr />
     </div>
 
