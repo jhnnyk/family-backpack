@@ -107,15 +107,7 @@ export default {
           this.password
         );
 
-        const userRef = db.doc(`users/${user.uid}`);
-        const snapShot = await userRef.get();
-
-        if (!snapShot.exists) {
-          await userRef.set({
-            displayName: this.displayName,
-            email: user.email
-          });
-        }
+        this.setUserDoc(user);
 
         router.push({ name: 'Home' });
       } catch (error) {
@@ -146,8 +138,24 @@ export default {
         displayName: this.displayName
       };
 
-      const result = await addNewParent(newParent);
-      console.log(result.data);
+      try {
+        const user = await addNewParent(newParent);
+        this.setUserDoc(user.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async setUserDoc(user) {
+      const userRef = db.doc(`users/${user.uid}`);
+      const snapShot = await userRef.get();
+
+      if (!snapShot.exists) {
+        await userRef.set({
+          displayName: this.displayName,
+          email: user.email
+        });
+      }
     }
   }
 };
