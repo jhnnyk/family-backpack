@@ -57,6 +57,18 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  addChildToFamily: ({ state }, child) => {
+    try {
+      const familyRef = db.collection('families').doc(state.family[0].id);
+      familyRef.update({
+        members: firebase.firestore.FieldValue.arrayUnion(child.id),
+        children: firebase.firestore.FieldValue.arrayUnion(child)
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

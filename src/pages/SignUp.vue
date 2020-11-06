@@ -144,8 +144,17 @@ export default {
       try {
         const user = await createNewFamilyMemberAccount(newFamilyMember);
         this.setUserDoc(user.data);
+
         if (this.signUpType === 'Parent') {
           store.dispatch('addParentToFamily', {
+            id: user.data.uid,
+            displayName: this.displayName,
+            email: user.data.email
+          });
+        }
+
+        if (this.signUpType === 'Child') {
+          store.dispatch('addChildToFamily', {
             id: user.data.uid,
             displayName: this.displayName,
             email: user.data.email

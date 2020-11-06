@@ -19,9 +19,8 @@
           {{ child.displayName }}
         </li>
       </ul>
-      <button type="button">
-        <i class="material-icons">person_add</i> add child
-      </button>
+      <AddNewChild />
+
       <hr />
     </div>
 
@@ -66,13 +65,15 @@ import { firebaseFunc } from '../firebase';
 import { store } from '../store/store';
 
 import AddNewParent from '../components/AddNewParent';
+import AddNewChild from '../components/AddNewChild';
 
 const findUserByEmail = firebaseFunc.httpsCallable('findUserByEmail');
 
 export default {
   name: 'AppPrefs',
   components: {
-    AddNewParent
+    AddNewParent,
+    AddNewChild
   },
   data() {
     return {
