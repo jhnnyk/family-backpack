@@ -50,6 +50,11 @@ button .material-icons {
   margin-right: 5px;
 }
 
+input[type='checkbox']:checked + label {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
