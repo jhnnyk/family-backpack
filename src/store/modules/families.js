@@ -59,13 +59,14 @@ const actions = {
     }
   },
 
-  addChildToFamily: ({ state }, child) => {
+  addChildToFamily: async ({ dispatch, state }, child) => {
     try {
       const familyRef = db.collection('families').doc(state.family[0].id);
-      familyRef.update({
+      await familyRef.update({
         members: firebase.firestore.FieldValue.arrayUnion(child.id),
         children: firebase.firestore.FieldValue.arrayUnion(child)
       });
+      dispatch('createDefaultChorePage', child);
     } catch (error) {
       console.log(error);
     }

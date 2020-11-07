@@ -45,6 +45,18 @@ const actions = {
     }
   },
 
+  createDefaultChorePage: (context, child) => {
+    try {
+      db.collection('pages').add({
+        owner: child.id,
+        title: 'Daily Chores',
+        type: 'daily-chores'
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
   selectPage: async ({ dispatch, commit }, page) => {
     await commit('selectPage', page);
     dispatch('setTasksRef', page);
