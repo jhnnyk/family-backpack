@@ -9,12 +9,19 @@ const state = {
 const getters = {
   getPages: state => state.pages,
   getSelectedPage: state => state.selectedPage,
-  userCanEdit: (state, getters) =>
-    // must be a parent to edit Daily Chore pages or be the page owner of a normal page
-    (getters.currentUserIsParent &&
-      state.selectedPage.type === 'daily-chores') ||
-    (state.selectedPage.type !== 'daily-chores' &&
-      state.selectedPage.owner === getters.getUser.id)
+  userCanEdit: (state, getters) => {
+    if (state.selectedPage) {
+      // must be a parent to edit Daily Chore pages or be the page owner of a normal page
+      return (
+        (getters.currentUserIsParent &&
+          state.selectedPage.type === 'daily-chores') ||
+        (state.selectedPage.type !== 'daily-chores' &&
+          state.selectedPage.owner === getters.getUser.id)
+      );
+    } else {
+      return false;
+    }
+  }
 };
 
 const mutations = {
