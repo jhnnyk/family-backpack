@@ -20,6 +20,7 @@
 import { mapGetters } from 'vuex';
 import { auth } from '../firebase';
 import router from '../router';
+import { store } from '../store/store';
 
 export default {
   name: 'TitleBar',
@@ -30,6 +31,7 @@ export default {
     async signOut() {
       try {
         await auth.signOut();
+        store.dispatch('clearSelectedPage');
 
         if (this.$route.path !== '/') {
           router.push({ name: 'Home' });

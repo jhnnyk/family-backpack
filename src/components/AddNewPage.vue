@@ -24,7 +24,9 @@
       >
         <option disabled value="">Please select one</option>
         <option value="todo-list">To Do List</option>
-        <option value="daily-chores">Daily Chore List</option>
+        <option value="daily-chores" v-if="currentUserIsParent"
+          >Daily Chore List</option
+        >
       </select>
 
       <p class="feedback">{{ feedback }}</p>
@@ -37,6 +39,7 @@
 
 <script>
 import { store } from '../store/store';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'AddNewPage',
@@ -49,6 +52,9 @@ export default {
       hasPageTypeError: false,
       feedback: ''
     };
+  },
+  computed: {
+    ...mapGetters(['currentUserIsParent'])
   },
   methods: {
     showForm() {

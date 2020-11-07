@@ -10,6 +10,7 @@ const getters = {
   getPages: state => state.pages,
   getSelectedPage: state => state.selectedPage,
   userCanEdit: (state, getters) =>
+    // must be a parent to edit Daily Chore pages or be the page owner of a normal page
     (getters.currentUserIsParent &&
       state.selectedPage.type === 'daily-chores') ||
     (state.selectedPage.type !== 'daily-chores' &&
@@ -65,6 +66,10 @@ const actions = {
   selectPage: async ({ dispatch, commit }, page) => {
     await commit('selectPage', page);
     dispatch('setTasksRef', page);
+  },
+
+  clearSelectedPage: ({ commit }) => {
+    commit('selectPage', null);
   }
 };
 
