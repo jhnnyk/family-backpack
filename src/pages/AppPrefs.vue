@@ -5,7 +5,7 @@
     <div class="family-info" v-if="getFamily">
       <h2><i class="material-icons">groups</i> {{ getFamily.name }}</h2>
 
-      <p>Parents:</p>
+      <h4>Parents:</h4>
       <ul>
         <li v-for="(parent, index) in getFamily.parents" :key="index">
           {{ parent.displayName }}
@@ -13,15 +13,13 @@
       </ul>
       <AddNewParent v-if="currentUserIsParent" />
 
-      <p>Children:</p>
+      <h4>Children:</h4>
       <ul>
         <li v-for="(child, index) in getFamily.children" :key="index">
           {{ child.displayName }}
         </li>
       </ul>
       <AddNewChild v-if="currentUserIsParent" />
-
-      <hr />
     </div>
 
     <div class="add-family" v-if="!getFamily">
@@ -86,3 +84,28 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+h4 {
+  margin-top: 15px;
+}
+
+ul {
+  margin-bottom: 10px;
+}
+
+li {
+  display: inline;
+  border-right: 1px solid #ccc;
+  padding: 0 10px;
+}
+
+li:last-child {
+  border-right: none;
+}
+</style>
