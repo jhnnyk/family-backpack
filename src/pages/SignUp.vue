@@ -1,5 +1,9 @@
 <template>
   <div class="signup-form container">
+    <div class="loading-container" v-if="loading">
+      <div class="loading"></div>
+    </div>
+
     <h2>{{ signUpType ? `Add New ${signUpType}` : 'Sign Up' }}</h2>
     <form @keydown.enter="signUp">
       <label for="display_name">Display Name: </label>
@@ -72,7 +76,8 @@ export default {
       hasPasswordError: false,
       hasEmailError: false,
       hasDisplayNameError: false,
-      feedback: ''
+      feedback: '',
+      loading: false
     };
   },
   methods: {
@@ -135,6 +140,8 @@ export default {
     },
 
     async signUpNewFamilyMember() {
+      this.loading = true;
+
       const newFamilyMember = {
         email: this.email,
         password: this.password,
@@ -143,7 +150,7 @@ export default {
 
       try {
         const user = await createNewFamilyMemberAccount(newFamilyMember);
-        this.setUserDoc(user.data);
+        await this.setUserDoc(user.data);
 
         if (this.signUpType === 'Parent') {
           store.dispatch('addParentToFamily', {
@@ -160,6 +167,8 @@ export default {
             email: user.data.email
           });
         }
+
+        this.loading = false;
       } catch (error) {
         console.log(error);
       }

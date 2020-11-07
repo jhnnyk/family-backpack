@@ -64,6 +64,31 @@ button .material-icons {
   margin: 5vw;
   background-color: #fff;
   padding: 3vw;
+  position: relative;
+}
+
+.loading-container {
+  background-color: rgba(200, 200, 200, 0.5);
+  position: absolute;
+  padding: 50px;
+}
+
+.loading {
+  border: 16px solid #999; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .danger {
