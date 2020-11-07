@@ -41,33 +41,16 @@
 
         <button type="button" @click="createNewFamily">Create family</button>
       </form>
-      <hr />
     </div>
-    <h3>Search for user by email</h3>
-    <p>this doesn't really serve a purpose right now -- just testing</p>
-    <form @submit.prevent>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        v-model="inviteUserEmail"
-        placeholder="enter email"
-      />
-      <button type="button" @click="findUser">Search for user</button>
-    </form>
-    <p v-if="loading">loading...</p>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import { firebaseFunc } from '../firebase';
 import { store } from '../store/store';
 
 import AddNewParent from '../components/AddNewParent';
 import AddNewChild from '../components/AddNewChild';
-
-const findUserByEmail = firebaseFunc.httpsCallable('findUserByEmail');
 
 export default {
   name: 'AppPrefs',
@@ -79,9 +62,7 @@ export default {
     return {
       newFamilyName: '',
       hasFamilyNameError: false,
-      feedback: '',
-      loading: false,
-      inviteUserEmail: ''
+      feedback: ''
     };
   },
   computed: {
@@ -101,13 +82,6 @@ export default {
       }
 
       await store.dispatch('createNewFamily', this.newFamilyName);
-    },
-
-    async findUser() {
-      this.loading = true;
-      const result = await findUserByEmail({ email: this.inviteUserEmail });
-      this.loading = false;
-      console.log(result.data);
     }
   }
 };
