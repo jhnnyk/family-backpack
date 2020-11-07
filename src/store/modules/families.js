@@ -13,6 +13,11 @@ const getters = {
     } else {
       return null;
     }
+  },
+
+  currentUserIsParent: (state, getters, rootState) => {
+    const isParent = p => p.id === rootState.users.user.id;
+    return state.family[0].parents.some(isParent);
   }
 };
 

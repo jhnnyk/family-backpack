@@ -11,7 +11,7 @@
           {{ parent.displayName }}
         </li>
       </ul>
-      <AddNewParent />
+      <AddNewParent v-if="currentUserIsParent" />
 
       <p>Children:</p>
       <ul>
@@ -19,7 +19,7 @@
           {{ child.displayName }}
         </li>
       </ul>
-      <AddNewChild />
+      <AddNewChild v-if="currentUserIsParent" />
 
       <hr />
     </div>
@@ -66,7 +66,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getFamily'])
+    ...mapGetters(['getFamily', 'currentUserIsParent'])
   },
   methods: {
     clearErrorMessage() {
