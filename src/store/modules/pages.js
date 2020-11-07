@@ -10,7 +10,10 @@ const getters = {
   getPages: state => state.pages,
   getSelectedPage: state => state.selectedPage,
   userCanEdit: (state, getters) =>
-    getters.currentUserIsParent || state.selectedPage.type !== 'daily-chores'
+    (getters.currentUserIsParent &&
+      state.selectedPage.type === 'daily-chores') ||
+    (state.selectedPage.type !== 'daily-chores' &&
+      state.selectedPage.owner === getters.getUser.id)
 };
 
 const mutations = {
