@@ -19,7 +19,7 @@
         </li>
       </ul>
 
-      <AddNewTask />
+      <AddNewTask v-if="userCanEdit" />
     </div>
     <div v-else>
       <p>please select a page</p>
@@ -39,7 +39,7 @@ export default {
     AddNewTask
   },
   computed: {
-    ...mapGetters(['getSelectedPage', 'getPageTasks'])
+    ...mapGetters(['getSelectedPage', 'getPageTasks', 'userCanEdit'])
   },
   methods: {
     async toggleTaskComplete(task) {

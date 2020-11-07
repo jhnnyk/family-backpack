@@ -8,7 +8,9 @@ const state = {
 
 const getters = {
   getPages: state => state.pages,
-  getSelectedPage: state => state.selectedPage
+  getSelectedPage: state => state.selectedPage,
+  userCanEdit: (state, getters) =>
+    getters.currentUserIsParent || state.selectedPage.type !== 'daily-chores'
 };
 
 const mutations = {
