@@ -30,7 +30,10 @@ export default {
     async signOut() {
       try {
         await auth.signOut();
-        router.push({ name: 'Home' });
+
+        if (this.$route.path !== '/') {
+          router.push({ name: 'Home' });
+        }
       } catch (error) {
         console.log(error);
       }
