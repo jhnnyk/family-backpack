@@ -3,12 +3,17 @@ import { db } from '../../firebase';
 
 const state = {
   pages: [],
+  childsPages: [],
   selectedPage: null
 };
 
 const getters = {
   getPages: state => state.pages,
+
   getSelectedPage: state => state.selectedPage,
+
+  childsPages: state => state.childsPages,
+
   userCanEdit: (state, getters) => {
     if (state.selectedPage) {
       // must be a parent to edit Daily Chore pages or be the page owner of a normal page
@@ -27,6 +32,10 @@ const getters = {
 const mutations = {
   selectPage: (state, page) => {
     state.selectedPage = page;
+  },
+
+  setChildsPages: (state, pages) => {
+    state.childsPages = pages;
   }
 };
 
@@ -77,6 +86,25 @@ const actions = {
 
   clearSelectedPage: ({ commit }) => {
     commit('selectPage', null);
+  },
+
+  getChildsPages: async ({ commit }, childId) => {
+    const childsPages = [];
+
+    try {
+      const childsPagesRef = await db
+        .collection('pages')
+        .where('owner', '==', childId)
+        .get();
+
+      childsPagesRef.forEach(page => {
+        childsPages.push({ id: page.id, ...page.data() });
+      });
+
+      commit('setChildsPages', childsPages);
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
