@@ -110,4 +110,21 @@ p.feedback {
   color: red;
   margin: 5px 0 0 0;
 }
+
+.sidebar {
+  flex-grow: 1;
+}
+
+.sidebar ul {
+  margin-bottom: 15px;
+}
+
+.sidebar li {
+  list-style-type: none;
+}
+
+.sidebar li:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 </style>

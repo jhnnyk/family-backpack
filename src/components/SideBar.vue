@@ -11,6 +11,7 @@
       </li>
     </ul>
     <AddNewPage />
+    <SideBarKids v-if="currentUserIsParent" />
   </nav>
 </template>
 
@@ -19,14 +20,16 @@ import { store } from '../store/store';
 import { mapGetters } from 'vuex';
 
 import AddNewPage from '../components/AddNewPage';
+import SideBarKids from '../components/SideBarKids';
 
 export default {
   name: 'SideBar',
   components: {
-    AddNewPage
+    AddNewPage,
+    SideBarKids
   },
   computed: {
-    ...mapGetters(['getPages'])
+    ...mapGetters(['getPages', 'currentUserIsParent'])
   },
   created() {
     store.dispatch('setPagesRef');
@@ -38,21 +41,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.sidebar {
-  flex-grow: 1;
-}
-
-.page-list {
-  margin: 15px 0;
-}
-
-.page-list li {
-  list-style-type: none;
-}
-
-.page-list li:hover {
-  cursor: pointer;
-}
-</style>
