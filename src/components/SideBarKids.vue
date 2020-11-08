@@ -9,7 +9,11 @@
       >
         {{ child.displayName }}
         <ul v-if="showChild === child.id">
-          <li v-for="(page, index) in childsPages" :key="index">
+          <li
+            v-for="(page, index) in childsPages"
+            :key="index"
+            @click="selectPage(page)"
+          >
             {{ page.title }}
           </li>
         </ul>
@@ -39,6 +43,10 @@ export default {
     getChildsPages(id) {
       this.showChild = id;
       store.dispatch('getChildsPages', id);
+    },
+
+    selectPage(page) {
+      store.dispatch('selectPage', page);
     }
   }
 };
