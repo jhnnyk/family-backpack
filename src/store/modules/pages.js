@@ -8,20 +8,14 @@ const state = {
 };
 
 const getters = {
-  getPages: state => state.pages,
-
-  getSelectedPage: state => state.selectedPage,
-
-  childsPages: state => state.childsPages,
-
-  userCanEdit: (state, getters) => {
+  userCanEdit: (state, getters, rootState) => {
     if (state.selectedPage) {
       // must be a parent to edit Daily Chore pages or be the page owner of a normal page
       return (
         (getters.currentUserIsParent &&
           state.selectedPage.type === 'daily-chores') ||
         (state.selectedPage.type !== 'daily-chores' &&
-          state.selectedPage.owner === getters.getUser.id)
+          state.selectedPage.owner === rootState.users.user.id)
       );
     } else {
       return false;

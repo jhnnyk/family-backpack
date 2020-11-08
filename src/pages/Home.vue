@@ -1,6 +1,6 @@
 <template>
   <div class="home-wrapper container">
-    <div class="home" v-if="getUser">
+    <div class="home" v-if="currentUser">
       <SideBar />
       <PageContent />
     </div>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 
 import PageContent from '../components/PageContent';
 import SideBar from '../components/SideBar';
@@ -29,7 +29,9 @@ export default {
     SideBar
   },
   computed: {
-    ...mapGetters(['getUser'])
+    ...mapState({
+      currentUser: state => state.users.user
+    })
   }
 };
 </script>

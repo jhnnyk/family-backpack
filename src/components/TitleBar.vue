@@ -1,8 +1,8 @@
 <template>
   <header>
     <h1><router-link to="/">Fubby</router-link></h1>
-    <div v-if="getUser">
-      Hello {{ getUser.displayName }}!
+    <div v-if="currentUser">
+      Hello {{ currentUser.displayName }}!
       <router-link to="/settings">
         <i class="material-icons">settings</i>
       </router-link>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import { auth } from '../firebase';
 import router from '../router';
 import { store } from '../store/store';
@@ -25,7 +25,9 @@ import { store } from '../store/store';
 export default {
   name: 'TitleBar',
   computed: {
-    ...mapGetters(['getUser'])
+    ...mapState({
+      currentUser: state => state.users.user
+    })
   },
   methods: {
     async signOut() {

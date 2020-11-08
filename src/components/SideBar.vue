@@ -2,11 +2,7 @@
   <nav class="sidebar">
     <h3>Pages</h3>
     <ul class="page-list">
-      <li
-        v-for="(page, index) in getPages"
-        :key="index"
-        @click="selectPage(page)"
-      >
+      <li v-for="(page, index) in pages" :key="index" @click="selectPage(page)">
         {{ page.title }}
       </li>
     </ul>
@@ -17,7 +13,7 @@
 
 <script>
 import { store } from '../store/store';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 import AddNewPage from '../components/AddNewPage';
 import SideBarKids from '../components/SideBarKids';
@@ -29,7 +25,10 @@ export default {
     SideBarKids
   },
   computed: {
-    ...mapGetters(['getPages', 'currentUserIsParent'])
+    ...mapState({
+      pages: state => state.pages.pages
+    }),
+    ...mapGetters(['currentUserIsParent'])
   },
   created() {
     store.dispatch('setPagesRef');

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import { store } from '../store/store';
 
 export default {
@@ -30,7 +30,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getFamily', 'childsPages'])
+    ...mapState({
+      childsPages: state => state.pages.childsPages
+    }),
+    ...mapGetters(['getFamily'])
   },
   methods: {
     getChildsPages(id) {

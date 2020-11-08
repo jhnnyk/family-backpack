@@ -1,13 +1,13 @@
 <template>
   <main class="page-content">
-    <div v-if="getSelectedPage">
-      <h1>{{ getSelectedPage.title }}</h1>
-      <p v-if="getSelectedPage.type === 'daily-chores'">
+    <div v-if="selectedPage">
+      <h1>{{ selectedPage.title }}</h1>
+      <p v-if="selectedPage.type === 'daily-chores'">
         this is a Daily Chore page. all tasks will be reset each day
       </p>
 
       <ul class="task-list">
-        <li v-for="(task, index) in getPageTasks" :key="index">
+        <li v-for="(task, index) in pageTasks" :key="index">
           <input
             type="checkbox"
             :name="`task-${index}`"
@@ -29,7 +29,7 @@
 
 <script>
 import { store } from '../store/store';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 import AddNewTask from '../components/AddNewTask';
 
@@ -39,7 +39,11 @@ export default {
     AddNewTask
   },
   computed: {
-    ...mapGetters(['getSelectedPage', 'getPageTasks', 'userCanEdit'])
+    ...mapState({
+      selectedPage: state => state.pages.selectedPage,
+      pageTasks: state => state.tasks.pageTasks
+    }),
+    ...mapGetters(['userCanEdit'])
   },
   methods: {
     async toggleTaskComplete(task) {
@@ -53,12 +57,12 @@ export default {
     }
   },
   watch: {
-    getPageTasks() {
+    pageTasks() {
       // reset tasks daily on Daily Chore pages
-      if (this.getSelectedPage.type === 'daily-chores') {
+      if (this.selectedPage.type === 'daily-chores') {
         const todaysDate = new Date().getDate();
 
-        this.getPageTasks.forEach(task => {
+        this.pageTasks.forEach(task => {
           if (task.completed !== 0 && task.completed !== todaysDate) {
             this.toggleTaskComplete(task);
           }

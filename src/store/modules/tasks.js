@@ -5,9 +5,7 @@ const state = {
   pageTasks: []
 };
 
-const getters = {
-  getPageTasks: state => state.pageTasks
-};
+const getters = {};
 
 const mutations = {};
 
