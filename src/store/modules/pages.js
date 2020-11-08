@@ -20,6 +20,14 @@ const getters = {
     } else {
       return false;
     }
+  },
+
+  selectedPageId: state => {
+    if (state.selectedPage) {
+      return state.selectedPage.id;
+    } else {
+      return 0;
+    }
   }
 };
 

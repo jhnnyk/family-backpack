@@ -13,6 +13,7 @@
             v-for="(page, index) in childsPages"
             :key="index"
             @click="selectPage(page)"
+            :class="[page.id === selectedPageId ? 'selected' : '']"
           >
             {{ page.title }}
           </li>
@@ -37,7 +38,7 @@ export default {
     ...mapState({
       childsPages: state => state.pages.childsPages
     }),
-    ...mapGetters(['currentFamily'])
+    ...mapGetters(['currentFamily', 'selectedPageId'])
   },
   methods: {
     getChildsPages(id) {
@@ -54,6 +55,8 @@ export default {
 
 <style scoped>
 .sidebar-family {
-  padding-top: 30px;
+  border-top: 1px solid var(--blue);
+  padding-top: 15px;
+  margin-top: 15px;
 }
 </style>

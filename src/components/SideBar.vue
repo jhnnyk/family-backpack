@@ -2,7 +2,12 @@
   <nav class="sidebar">
     <h3>My Pages</h3>
     <ul class="page-list">
-      <li v-for="(page, index) in pages" :key="index" @click="selectPage(page)">
+      <li
+        v-for="(page, index) in pages"
+        :key="index"
+        @click="selectPage(page)"
+        :class="[page.id === selectedPageId ? 'selected' : '']"
+      >
         {{ page.title }}
       </li>
     </ul>
@@ -28,7 +33,7 @@ export default {
     ...mapState({
       pages: state => state.pages.pages
     }),
-    ...mapGetters(['currentUserIsParent'])
+    ...mapGetters(['currentUserIsParent', 'selectedPageId'])
   },
   created() {
     store.dispatch('setPagesRef');

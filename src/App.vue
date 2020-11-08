@@ -59,12 +59,27 @@ li {
   padding: 0;
 }
 
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+li.selected {
+  color: var(--green);
+  font-weight: bold;
+}
+
 button {
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--blue);
-  border-radius: 5px;
+  border-radius: 7px;
   background-color: white;
+  padding: 3px 5px;
 }
 
 button .material-icons {

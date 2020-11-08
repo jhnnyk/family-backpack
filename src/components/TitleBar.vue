@@ -8,7 +8,7 @@
       </router-link>
       <button type="button" @click="signOut">Sign Out</button>
     </div>
-    <div v-else>
+    <div class="signin-signup" v-else>
       <router-link to="/signin">Sign In</router-link>
       or
       <router-link to="/signup">Sign Up</router-link>
@@ -56,9 +56,24 @@ header {
   padding: 10px 20px;
   background-color: var(--blue);
   color: var(--bg-color);
+  font-family: 'Pacifico', cursive;
+}
+
+div {
+  display: inline-flex;
+  align-items: center;
 }
 
 a {
   color: var(--pink);
+  text-decoration: none;
+}
+
+.material-icons {
+  padding: 0 6px;
+}
+
+.signin-signup a {
+  margin: 0 5px;
 }
 </style>
