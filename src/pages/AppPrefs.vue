@@ -2,12 +2,12 @@
   <div class="app-prefs container">
     <h1>Settings</h1>
     <hr />
-    <div class="family-info" v-if="getFamily">
-      <h2><i class="material-icons">groups</i> {{ getFamily.name }}</h2>
+    <div class="family-info" v-if="currentFamily">
+      <h2><i class="material-icons">groups</i> {{ currentFamily.name }}</h2>
 
       <h4>Parents:</h4>
       <ul>
-        <li v-for="(parent, index) in getFamily.parents" :key="index">
+        <li v-for="(parent, index) in currentFamily.parents" :key="index">
           {{ parent.displayName }}
         </li>
       </ul>
@@ -15,14 +15,14 @@
 
       <h4>Children:</h4>
       <ul>
-        <li v-for="(child, index) in getFamily.children" :key="index">
+        <li v-for="(child, index) in currentFamily.children" :key="index">
           {{ child.displayName }}
         </li>
       </ul>
       <AddNewChild v-if="currentUserIsParent" />
     </div>
 
-    <div class="add-family" v-if="!getFamily">
+    <div class="add-family" v-if="!currentFamily">
       <h2>Create Family</h2>
       <form @submit.prevent>
         <input
@@ -64,7 +64,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getFamily', 'currentUserIsParent'])
+    ...mapGetters(['currentFamily', 'currentUserIsParent'])
   },
   methods: {
     clearErrorMessage() {

@@ -3,7 +3,7 @@
     <h3>My Kids</h3>
     <ul class="family-list">
       <li
-        v-for="(child, index) in getFamily.children"
+        v-for="(child, index) in currentFamily.children"
         :key="index"
         @click="getChildsPages(child.id)"
       >
@@ -33,7 +33,7 @@ export default {
     ...mapState({
       childsPages: state => state.pages.childsPages
     }),
-    ...mapGetters(['getFamily'])
+    ...mapGetters(['currentFamily'])
   },
   methods: {
     getChildsPages(id) {

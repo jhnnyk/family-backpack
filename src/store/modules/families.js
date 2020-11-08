@@ -7,7 +7,7 @@ const state = {
 };
 
 const getters = {
-  getFamily: state => {
+  currentFamily: state => {
     if (state.family) {
       return state.family[0];
     } else {
