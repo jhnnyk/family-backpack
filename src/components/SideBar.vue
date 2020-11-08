@@ -1,6 +1,6 @@
 <template>
   <nav class="sidebar">
-    <h3>Pages</h3>
+    <h3>My Pages</h3>
     <ul class="page-list">
       <li v-for="(page, index) in pages" :key="index" @click="selectPage(page)">
         {{ page.title }}
