@@ -53,7 +53,12 @@ header {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
-  padding: 0 20px;
-  background-color: #fff;
+  padding: 10px 20px;
+  background-color: var(--blue);
+  color: var(--bg-color);
+}
+
+a {
+  color: var(--pink);
 }
 </style>

@@ -30,9 +30,21 @@ export default {
 </script>
 
 <style>
+:root {
+  --bg-color: #fff9eb; /* "Old Lace" Cooler.co */
+  --font-color: #073b4c; /* "Midnight Green Eagle Green" Cooler.co */
+  --pink: #ef436b; /* "Paradise Pink" Cooler.co */
+  --green: #06d6a0; /* "Caribbean Green" Cooler.co */
+  --blue: #118ab2; /* "Blue NCS" Cooler.co */
+}
+
 body {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white;
+  color: var(--font-color);
   margin: 0;
-  background-color: #f2f6fa;
 }
 
 h1,
@@ -50,6 +62,9 @@ li {
 button {
   display: inline-flex;
   align-items: center;
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  background-color: white;
 }
 
 button .material-icons {
@@ -61,19 +76,12 @@ input[type='checkbox']:checked + label {
   color: #aaa;
 }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
 .container {
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
     0 0 0 1px rgba(10, 10, 10, 0.02);
   border-radius: 6px;
   margin: 5vw;
-  background-color: #fff;
+  background-color: var(--bg-color);
   padding: 3vw;
   position: relative;
 }
