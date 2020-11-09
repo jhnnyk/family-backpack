@@ -9,12 +9,14 @@
         @click="toggleTaskComplete(task)"
       />
       <label :for="task.id">{{ task.content }}</label>
-      <a @click="currentlyEditing = true" title="edit">
-        <i class="material-icons">edit</i>
-      </a>
-      <a @click="deleteTask(task)" title="delete task">
-        <i class="material-icons">delete</i>
-      </a>
+      <div class="task-admin" v-if="userCanEdit">
+        <a @click="currentlyEditing = true" title="edit">
+          <i class="material-icons">edit</i>
+        </a>
+        <a @click="deleteTask(task)" title="delete task">
+          <i class="material-icons">delete</i>
+        </a>
+      </div>
     </div>
 
     <div v-if="currentlyEditing">
@@ -23,17 +25,20 @@
         v-model="task.content"
         @keydown.enter="saveEdits(task)"
       />
-      <a @click="saveEdits(task)" title="save changes">
-        <i class="material-icons">done</i>
-      </a>
-      <a @click="currentlyEditing = false" title="undo changes">
-        <i class="material-icons">undo</i>
-      </a>
+      <div class="task-admin">
+        <a @click="saveEdits(task)" title="save changes">
+          <i class="material-icons">done</i>
+        </a>
+        <a @click="currentlyEditing = false" title="undo changes">
+          <i class="material-icons">undo</i>
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { store } from '../store/store';
 
 export default {
@@ -45,6 +50,9 @@ export default {
     return {
       currentlyEditing: false
     };
+  },
+  computed: {
+    ...mapGetters(['userCanEdit'])
   },
   methods: {
     async toggleTaskComplete(task) {
@@ -68,3 +76,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.task-admin {
+  display: inline;
+}
+</style>
