@@ -9,9 +9,12 @@
         @click="toggleTaskComplete(task)"
       />
       <label :for="task.id">{{ task.content }}</label>
-      <a @click="currentlyEditing = true" title="edit"
-        ><i class="material-icons">edit</i></a
-      >
+      <a @click="currentlyEditing = true" title="edit">
+        <i class="material-icons">edit</i>
+      </a>
+      <a @click="deleteTask(task)" title="delete task">
+        <i class="material-icons">delete</i>
+      </a>
     </div>
 
     <div v-if="currentlyEditing">
@@ -20,12 +23,12 @@
         v-model="task.content"
         @keydown.enter="saveEdits(task)"
       />
-      <a @click="saveEdits(task)" title="save changes"
-        ><i class="material-icons">done</i></a
-      >
-      <a @click="currentlyEditing = false" title="undo changes"
-        ><i class="material-icons">undo</i></a
-      >
+      <a @click="saveEdits(task)" title="save changes">
+        <i class="material-icons">done</i>
+      </a>
+      <a @click="currentlyEditing = false" title="undo changes">
+        <i class="material-icons">undo</i>
+      </a>
     </div>
   </div>
 </template>
@@ -57,6 +60,10 @@ export default {
     async saveEdits(task) {
       await store.dispatch('updateTask', task);
       this.currentlyEditing = false;
+    },
+
+    deleteTask(task) {
+      store.dispatch('deleteTask', task);
     }
   }
 };

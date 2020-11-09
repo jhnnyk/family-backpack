@@ -52,6 +52,18 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  deleteTask: ({ rootState }, task) => {
+    try {
+      db.collection('pages')
+        .doc(rootState.pages.selectedPage.id)
+        .collection('tasks')
+        .doc(task.id)
+        .delete();
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

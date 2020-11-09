@@ -65,6 +65,7 @@ a {
 }
 
 a:hover {
+  cursor: pointer;
   text-decoration: underline;
 }
 
