@@ -8,7 +8,7 @@
         @click="getChildsPages(child.id)"
       >
         {{ child.displayName }}
-        <ul v-if="showChild === child.id">
+        <ul class="childs-pages" v-if="showChild === child.id">
           <li
             v-for="(page, index) in childsPages"
             :key="index"
@@ -58,5 +58,9 @@ export default {
   border-top: 1px solid var(--blue);
   padding-top: 15px;
   margin-top: 15px;
+}
+
+.childs-pages {
+  margin-left: 15px;
 }
 </style>
