@@ -8,14 +8,7 @@
 
       <ul class="task-list">
         <li v-for="(task, index) in pageTasks" :key="index">
-          <input
-            type="checkbox"
-            :name="`task-${index}`"
-            :id="`task-${index}`"
-            :checked="!!task.completed"
-            @click="toggleTaskComplete(task)"
-          />
-          <label :for="`task-${index}`">{{ task.content }}</label>
+          <TaskItem :task="task" />
         </li>
       </ul>
 
@@ -32,11 +25,13 @@ import { store } from '../store/store';
 import { mapGetters, mapState } from 'vuex';
 
 import AddNewTask from '../components/AddNewTask';
+import TaskItem from '../components/TaskItem';
 
 export default {
   name: 'PageContent',
   components: {
-    AddNewTask
+    AddNewTask,
+    TaskItem
   },
   computed: {
     ...mapState({
@@ -44,17 +39,6 @@ export default {
       pageTasks: state => state.tasks.pageTasks
     }),
     ...mapGetters(['userCanEdit'])
-  },
-  methods: {
-    async toggleTaskComplete(task) {
-      if (task.completed) {
-        task.completed = 0;
-        await store.dispatch('updateTask', task);
-      } else {
-        task.completed = new Date().getDate();
-        await store.dispatch('updateTask', task);
-      }
-    }
   },
   watch: {
     pageTasks() {
@@ -67,6 +51,17 @@ export default {
             this.toggleTaskComplete(task);
           }
         });
+      }
+    }
+  },
+  methods: {
+    async toggleTaskComplete(task) {
+      if (task.completed) {
+        task.completed = 0;
+        await store.dispatch('updateTask', task);
+      } else {
+        task.completed = new Date().getDate();
+        await store.dispatch('updateTask', task);
       }
     }
   }
