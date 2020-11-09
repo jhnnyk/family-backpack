@@ -3,7 +3,7 @@ import { firestoreAction } from 'vuexfire';
 import { db } from '../../firebase';
 
 const state = {
-  family: null
+  family: []
 };
 
 const getters = {
@@ -11,13 +11,13 @@ const getters = {
     if (state.family) {
       return state.family[0];
     } else {
-      return null;
+      return [];
     }
   },
 
   currentUserIsParent: (state, getters, rootState) => {
     const isParent = p => p.id === rootState.users.user.id;
-    if (state.family) {
+    if (state.family[0]) {
       return state.family[0].parents.some(isParent);
     } else {
       return false;
