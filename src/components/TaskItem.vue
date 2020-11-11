@@ -78,7 +78,24 @@ export default {
 </script>
 
 <style scoped>
+.task-item {
+  margin: 2px 0;
+}
+
+input[type='checkbox'] {
+  position: relative;
+  top: 2px;
+}
+
+label {
+  margin: 0 5px;
+}
+
 .task-admin {
   display: inline;
+}
+
+.task-admin .material-icons {
+  font-size: 1em;
 }
 </style>

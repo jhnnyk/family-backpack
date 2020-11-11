@@ -68,3 +68,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.add-new-task {
+  margin-top: 15px;
+}
+</style>

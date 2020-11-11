@@ -70,7 +70,7 @@ export default {
 
 <style>
 .page-content {
-  flex-grow: 3;
+  width: 75%;
   padding-left: 3vw;
 }
 

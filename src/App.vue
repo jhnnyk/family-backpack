@@ -136,7 +136,7 @@ p.feedback {
 }
 
 .sidebar {
-  flex-grow: 1;
+  width: 25%;
 }
 
 .sidebar ul {
