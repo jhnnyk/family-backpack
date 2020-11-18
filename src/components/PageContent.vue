@@ -6,11 +6,11 @@
         this is a Daily Chore page. all tasks will be reset each day
       </p>
 
-      <ul class="task-list">
+      <draggable v-model="pageTasks" tag="ul" class="task-list">
         <li v-for="(task, index) in pageTasks" :key="index">
           <TaskItem :task="task" />
         </li>
-      </ul>
+      </draggable>
 
       <AddNewTask v-if="userCanEdit" />
     </div>
@@ -23,6 +23,7 @@
 <script>
 import { store } from '../store/store';
 import { mapGetters, mapState } from 'vuex';
+import draggable from 'vuedraggable';
 
 import AddNewTask from '../components/AddNewTask';
 import TaskItem from '../components/TaskItem';
@@ -31,14 +32,22 @@ export default {
   name: 'PageContent',
   components: {
     AddNewTask,
-    TaskItem
+    TaskItem,
+    draggable
   },
   computed: {
     ...mapState({
-      selectedPage: state => state.pages.selectedPage,
-      pageTasks: state => state.tasks.pageTasks
+      selectedPage: state => state.pages.selectedPage
     }),
-    ...mapGetters(['userCanEdit'])
+    ...mapGetters(['userCanEdit']),
+    pageTasks: {
+      get() {
+        return store.state.tasks.pageTasks;
+      },
+      set(reorderedTasks) {
+        store.dispatch('reorderTasks', reorderedTasks);
+      }
+    }
   },
   watch: {
     pageTasks() {

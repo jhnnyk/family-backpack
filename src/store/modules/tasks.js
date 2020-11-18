@@ -33,7 +33,8 @@ const actions = {
         .collection('tasks')
         .add({
           content: task.content,
-          completed: 0
+          completed: 0,
+          sortOrder: 0
         });
     } catch (error) {
       console.log(error);
@@ -61,6 +62,20 @@ const actions = {
         .collection('tasks')
         .doc(task.id)
         .delete();
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  reorderTasks: ({ rootState }, tasks) => {
+    try {
+      tasks.forEach((task, index) => {
+        db.collection('pages')
+          .doc(rootState.pages.selectedPage.id)
+          .collection('tasks')
+          .doc(task.id)
+          .update({ sortOrder: index });
+      });
     } catch (error) {
       console.log(error);
     }
