@@ -16,7 +16,8 @@ const actions = {
       db
         .collection('pages')
         .doc(context.rootState.pages.selectedPage.id)
-        .collection('tasks'),
+        .collection('tasks')
+        .orderBy('sortOrder'),
       {
         wait: true,
         serialize: doc => {
