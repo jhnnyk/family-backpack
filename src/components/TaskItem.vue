@@ -1,7 +1,9 @@
 <template>
   <div class="task-item">
     <div v-if="!currentlyEditing">
-      <i class="material-icons reorder-handle">drag_handle</i>
+      <i v-if="userCanEdit" class="material-icons reorder-handle"
+        >drag_handle</i
+      >
       <input
         type="checkbox"
         :name="task.id"
