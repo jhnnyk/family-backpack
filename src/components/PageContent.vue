@@ -6,7 +6,12 @@
         this is a Daily Chore page. all tasks will be reset each day
       </p>
 
-      <draggable v-model="pageTasks" tag="ul" class="task-list">
+      <draggable
+        v-model="pageTasks"
+        tag="ul"
+        class="task-list"
+        handle=".reorder-handle"
+      >
         <li v-for="(task, index) in pageTasks" :key="index">
           <TaskItem :task="task" />
         </li>
