@@ -105,6 +105,7 @@ label {
 .reorder-handle {
   font-size: 0.7em;
   cursor: grab;
+  color: var(--muted);
 }
 
 .reorder-handle:active {

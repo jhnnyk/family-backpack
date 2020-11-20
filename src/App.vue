@@ -31,11 +31,12 @@ export default {
 
 <style>
 :root {
-  --bg-color: #fff9eb; /* "Old Lace" Cooler.co */
-  --font-color: #073b4c; /* "Midnight Green Eagle Green" Cooler.co */
-  --pink: #ef436b; /* "Paradise Pink" Cooler.co */
-  --green: #06d6a0; /* "Caribbean Green" Cooler.co */
-  --blue: #118ab2; /* "Blue NCS" Cooler.co */
+  --bg-color: #fff9eb; /* "Old Lace" Coolors.co */
+  --font-color: #073b4c; /* "Midnight Green Eagle Green" Coolors.co */
+  --pink: #ef436b; /* "Paradise Pink" Coolors.co */
+  --green: #06d6a0; /* "Caribbean Green" Coolors.co */
+  --blue: #118ab2; /* "Blue NCS" Coolors.co */
+  --muted: #aaa;
 }
 
 body {
@@ -89,7 +90,7 @@ button .material-icons {
 
 input[type='checkbox']:checked + label {
   text-decoration: line-through;
-  color: #aaa;
+  color: var(--muted);
 }
 
 .container {
