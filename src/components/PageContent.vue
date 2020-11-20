@@ -1,6 +1,8 @@
 <template>
   <main class="page-content">
     <div v-if="selectedPage">
+      <PageAdmin v-if="userCanEdit" />
+
       <h1>{{ selectedPage.title }}</h1>
       <p v-if="selectedPage.type === 'daily-chores'">
         this is a Daily Chore page. all tasks will be reset each day
@@ -32,12 +34,14 @@ import draggable from 'vuedraggable';
 
 import AddNewTask from '../components/AddNewTask';
 import TaskItem from '../components/TaskItem';
+import PageAdmin from '../components/PageAdmin';
 
 export default {
   name: 'PageContent',
   components: {
     AddNewTask,
     TaskItem,
+    PageAdmin,
     draggable
   },
   computed: {
@@ -84,6 +88,7 @@ export default {
 
 <style>
 .page-content {
+  position: relative;
   width: 75%;
   padding-left: 3vw;
 }
