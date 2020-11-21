@@ -107,6 +107,18 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  updatePageTitle: (context, newTitle) => {
+    try {
+      db.collection('pages')
+        .doc(state.selectedPage.id)
+        .update({
+          title: newTitle
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
