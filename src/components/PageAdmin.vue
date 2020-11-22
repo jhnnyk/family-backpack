@@ -102,6 +102,10 @@ export default {
   padding-left: 3px;
 }
 
+.title-setting div {
+  display: inline;
+}
+
 .save {
   color: var(--green);
 }
