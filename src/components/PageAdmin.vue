@@ -14,17 +14,20 @@
       </i>
 
       <EditPageTitle />
+      <PageCollaboration />
     </div>
   </div>
 </template>
 
 <script>
 import EditPageTitle from '../components/page-settings/EditPageTitle';
+import PageCollaboration from '../components/page-settings/PageCollaboration';
 
 export default {
   name: 'PageAdmin',
   components: {
-    EditPageTitle
+    EditPageTitle,
+    PageCollaboration
   },
   data() {
     return {
