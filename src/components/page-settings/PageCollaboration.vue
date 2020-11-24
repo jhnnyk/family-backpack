@@ -1,6 +1,11 @@
 <template>
   <div class="page-collaboration">
-    Collaborators:
+    Collaborators: Invites:
+    <ul>
+      <li v-for="(user, index) in invitedUsers" :key="index">
+        {{ user }}
+      </li>
+    </ul>
 
     <input
       type="text"
@@ -23,6 +28,7 @@
 <script>
 import { firebaseFunc } from '../../firebase';
 import { store } from '../../store/store';
+import { mapState } from 'vuex';
 
 const findUserByEmail = firebaseFunc.httpsCallable('findUserByEmail');
 
@@ -34,6 +40,11 @@ export default {
       feedback: '',
       loading: false
     };
+  },
+  computed: {
+    ...mapState({
+      invitedUsers: state => state.pages.selectedPage.invites
+    })
   },
   methods: {
     clearErrorMessage() {
