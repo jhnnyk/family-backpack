@@ -5,6 +5,7 @@ import { db } from '../../firebase';
 const state = {
   pages: [],
   childsPages: [],
+  pageInvites: [],
   selectedPage: null
 };
 
@@ -49,6 +50,21 @@ const actions = {
       db
         .collection('pages')
         .where('owner', '==', context.rootState.users.user.id),
+      {
+        wait: true,
+        serialize: doc => {
+          return { id: doc.id, ...doc.data() };
+        }
+      }
+    );
+  }),
+
+  setPageInvitesRef: firestoreAction(context => {
+    context.bindFirestoreRef(
+      'pageInvites',
+      db
+        .collection('pages')
+        .where('invites', 'array-contains', context.rootState.users.user.email),
       {
         wait: true,
         serialize: doc => {

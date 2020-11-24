@@ -37,6 +37,7 @@ export default {
   },
   created() {
     store.dispatch('setPagesRef');
+    store.dispatch('setPageInvitesRef');
   },
   methods: {
     selectPage(page) {
