@@ -1,3 +1,4 @@
+import firebase from 'firebase/app';
 import { firestoreAction } from 'vuexfire';
 import { db } from '../../firebase';
 
@@ -115,6 +116,18 @@ const actions = {
         .doc(state.selectedPage.id)
         .update({
           title: newTitle
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  inviteCollaborator: (context, email) => {
+    try {
+      db.collection('pages')
+        .doc(state.selectedPage.id)
+        .update({
+          invites: firebase.firestore.FieldValue.arrayUnion(email)
         });
     } catch (error) {
       console.log(error);
