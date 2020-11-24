@@ -84,8 +84,20 @@ button {
   padding: 3px 5px;
 }
 
+button.success {
+  border: none;
+  background-color: var(--green);
+  color: white;
+}
+
+button.danger {
+  border: none;
+  background-color: var(--pink);
+  color: white;
+}
+
 button .material-icons {
-  margin-right: 5px;
+  font-size: 1.1em;
 }
 
 input[type='checkbox']:checked + label {
@@ -127,7 +139,7 @@ input[type='checkbox']:checked + label {
   }
 }
 
-.danger {
+input.danger {
   border: 1px solid red;
 }
 
