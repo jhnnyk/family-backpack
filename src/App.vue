@@ -70,11 +70,6 @@ a:hover {
   text-decoration: underline;
 }
 
-li.selected {
-  color: var(--green);
-  font-weight: bold;
-}
-
 button {
   display: inline-flex;
   align-items: center;
@@ -82,6 +77,10 @@ button {
   border-radius: 7px;
   background-color: white;
   padding: 3px 5px;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 button.success {
@@ -146,22 +145,5 @@ input.danger {
 p.feedback {
   color: red;
   margin: 5px 0 0 0;
-}
-
-.sidebar {
-  width: 25%;
-}
-
-.sidebar ul {
-  margin-bottom: 15px;
-}
-
-.sidebar li {
-  list-style-type: none;
-}
-
-.sidebar li:hover {
-  cursor: pointer;
-  text-decoration: underline;
 }
 </style>

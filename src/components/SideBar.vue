@@ -9,28 +9,26 @@
         @click="selectPage(page)"
         :class="[page.id === selectedPageId ? 'selected' : '']"
       >
-        {{ page.title }}
+        <a>{{ page.title }}</a>
       </li>
-    </ul>
 
-    <AddNewPage />
-
-    <!-- page invites -->
-    <h3>Page Invites</h3>
-    <ul class="page-list">
       <li
         v-for="invite in invites"
         :key="invite.id"
         @click="selectPage(invite)"
         :class="[invite.id === selectedPageId ? 'selected' : '']"
+        class="invite"
       >
-        {{ invite.title }}
+        <a>{{ invite.title }}</a>
         <button class="success" type="button" title="Accept Invite">
           <i class="material-icons">add_circle</i>
         </button>
         <button class="danger" type="button" title="Decline Invite">
           <i class="material-icons">delete</i>
         </button>
+      </li>
+      <li>
+        <AddNewPage />
       </li>
     </ul>
 
@@ -70,3 +68,39 @@ export default {
   }
 };
 </script>
+
+<style>
+.sidebar {
+  width: 25%;
+}
+
+.sidebar h3 {
+  color: var(--blue);
+  font-size: 0.9em;
+  margin: 5px 0;
+  text-transform: uppercase;
+}
+
+.sidebar ul.page-list {
+  margin-bottom: 20px;
+}
+
+.sidebar li {
+  cursor: pointer;
+  list-style-type: none;
+  margin-left: 10px;
+}
+
+.sidebar li a {
+  color: var(--font-color);
+}
+
+.sidebar li.selected a {
+  color: var(--green);
+  font-weight: bold;
+}
+
+.sidebar li.invite button {
+  margin-left: 5px;
+}
+</style>

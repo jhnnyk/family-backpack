@@ -101,3 +101,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.add-new-page {
+  margin: 0 auto;
+}
+</style>
