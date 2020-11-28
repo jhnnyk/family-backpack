@@ -19,7 +19,7 @@
         :class="[invite.id === selectedPageId ? 'selected' : '']"
         class="invite"
       >
-        <a>{{ invite.title }}</a>
+        <span>Invite:</span> <a>{{ invite.title }}</a>
         <button class="success" type="button" title="Accept Invite">
           <i class="material-icons">add_circle</i>
         </button>
@@ -102,5 +102,11 @@ export default {
 
 .sidebar li.invite button {
   margin-left: 5px;
+}
+
+.sidebar li.invite span {
+  text-transform: uppercase;
+  font-size: 0.6em;
+  font-weight: bold;
 }
 </style>
