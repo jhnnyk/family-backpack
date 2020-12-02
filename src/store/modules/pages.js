@@ -148,6 +148,37 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  acceptInvite: (context, page) => {
+    try {
+      // remove user from invites array
+      context.dispatch('declineInvite', page);
+      // add user to collaborators array
+      db.collection('pages')
+        .doc(page.id)
+        .update({
+          collaborators: firebase.firestore.FieldValue.arrayUnion(
+            context.rootState.users.user.email
+          )
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  declineInvite: (context, page) => {
+    try {
+      db.collection('pages')
+        .doc(page.id)
+        .update({
+          invites: firebase.firestore.FieldValue.arrayRemove(
+            context.rootState.users.user.email
+          )
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

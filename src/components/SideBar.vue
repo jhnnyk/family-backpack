@@ -20,10 +20,20 @@
         class="invite"
       >
         <span>Invite:</span> <a>{{ invite.title }}</a>
-        <button class="success" type="button" title="Accept Invite">
+        <button
+          class="success"
+          type="button"
+          title="Accept Invite"
+          @click="acceptInvite(invite)"
+        >
           <i class="material-icons">add_circle</i>
         </button>
-        <button class="danger" type="button" title="Decline Invite">
+        <button
+          class="danger"
+          type="button"
+          title="Decline Invite"
+          @click="declineInvite(invite)"
+        >
           <i class="material-icons">delete</i>
         </button>
       </li>
@@ -64,6 +74,14 @@ export default {
   methods: {
     selectPage(page) {
       store.dispatch('selectPage', page);
+    },
+
+    acceptInvite(page) {
+      store.dispatch('acceptInvite', page);
+    },
+
+    declineInvite(page) {
+      store.dispatch('declineInvite', page);
     }
   }
 };
