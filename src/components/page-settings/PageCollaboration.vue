@@ -1,6 +1,13 @@
 <template>
   <div class="page-collaboration">
-    Collaborators: Invites:
+    Collaborators:
+    <ul>
+      <li v-for="user in collaborators" :key="user">
+        {{ user }}
+      </li>
+    </ul>
+
+    Invites:
     <ul>
       <li v-for="(user, index) in invitedUsers" :key="index">
         {{ user }}
@@ -43,7 +50,8 @@ export default {
   },
   computed: {
     ...mapState({
-      invitedUsers: state => state.pages.selectedPage.invites
+      invitedUsers: state => state.pages.selectedPage.invites,
+      collaborators: state => state.pages.selectedPage.collaborators
     })
   },
   methods: {
