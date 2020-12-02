@@ -1,8 +1,8 @@
 <template>
   <nav class="sidebar">
-    <!-- owner's pages -->
     <h3>My Pages</h3>
     <ul class="page-list">
+      <!-- owner's pages -->
       <li
         v-for="(page, index) in pages"
         :key="index"
@@ -12,6 +12,18 @@
         <a>{{ page.title }}</a>
       </li>
 
+      <!-- collab pages -->
+      <li
+        v-for="page in collabPages"
+        :key="page.id"
+        @click="selectPage(page)"
+        :class="[page.id === selectedPageId ? 'selected' : '']"
+        class="collab"
+      >
+        <a>{{ page.title }} <i class="material-icons">group</i></a>
+      </li>
+
+      <!-- page invites -->
       <li
         v-for="invite in invites"
         :key="invite.id"
@@ -63,13 +75,15 @@ export default {
   computed: {
     ...mapState({
       pages: state => state.pages.pages,
-      invites: state => state.pages.pageInvites
+      invites: state => state.pages.pageInvites,
+      collabPages: state => state.pages.collabPages
     }),
     ...mapGetters(['currentUserIsParent', 'selectedPageId'])
   },
   created() {
     store.dispatch('setPagesRef');
     store.dispatch('setPageInvitesRef');
+    store.dispatch('setCollabPagesRef');
   },
   methods: {
     selectPage(page) {
@@ -126,5 +140,9 @@ export default {
   text-transform: uppercase;
   font-size: 0.6em;
   font-weight: bold;
+}
+
+.sidebar li.collab .material-icons {
+  font-size: 0.9em;
 }
 </style>

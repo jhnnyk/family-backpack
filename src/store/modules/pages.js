@@ -6,6 +6,7 @@ const state = {
   pages: [],
   childsPages: [],
   pageInvites: [],
+  collabPages: [],
   selectedPage: null
 };
 
@@ -65,6 +66,25 @@ const actions = {
       db
         .collection('pages')
         .where('invites', 'array-contains', context.rootState.users.user.email),
+      {
+        wait: true,
+        serialize: doc => {
+          return { id: doc.id, ...doc.data() };
+        }
+      }
+    );
+  }),
+
+  setCollabPagesRef: firestoreAction(context => {
+    context.bindFirestoreRef(
+      'collabPages',
+      db
+        .collection('pages')
+        .where(
+          'collaborators',
+          'array-contains',
+          context.rootState.users.user.email
+        ),
       {
         wait: true,
         serialize: doc => {
