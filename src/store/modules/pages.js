@@ -13,12 +13,16 @@ const state = {
 const getters = {
   userCanEdit: (state, getters, rootState) => {
     if (state.selectedPage) {
-      // must be a parent to edit Daily Chore pages or be the page owner of a normal page
       return (
+        // must be a parent to edit Daily Chore pages
         (getters.currentUserIsParent &&
           state.selectedPage.type === 'daily-chores') ||
+        // or be the page owner of a normal page
         (state.selectedPage.type !== 'daily-chores' &&
-          state.selectedPage.owner === rootState.users.user.id)
+          state.selectedPage.owner === rootState.users.user.id) ||
+        // or be a collaborator on a normal page
+        (state.selectedPage.type !== 'daily-chores' &&
+          state.selectedPage.collaborators.includes(rootState.users.user.email))
       );
     } else {
       return false;
@@ -99,7 +103,9 @@ const actions = {
       db.collection('pages').add({
         owner: rootState.users.user.id,
         title: newPage.title,
-        type: newPage.type
+        type: newPage.type,
+        invites: [],
+        collaborators: []
       });
     } catch (error) {
       console.log(error);
