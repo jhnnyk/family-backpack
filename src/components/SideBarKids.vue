@@ -15,7 +15,7 @@
             @click="selectPage(page)"
             :class="[page.id === selectedPageId ? 'selected' : '']"
           >
-            {{ page.title }}
+            <a>{{ page.title }}</a>
           </li>
         </ul>
       </li>
@@ -54,12 +54,6 @@ export default {
 </script>
 
 <style scoped>
-.sidebar-family {
-  border-top: 1px solid var(--blue);
-  padding-top: 15px;
-  margin-top: 15px;
-}
-
 .childs-pages {
   margin-left: 15px;
 }

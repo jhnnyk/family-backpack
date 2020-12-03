@@ -70,11 +70,6 @@ a:hover {
   text-decoration: underline;
 }
 
-li.selected {
-  color: var(--green);
-  font-weight: bold;
-}
-
 button {
   display: inline-flex;
   align-items: center;
@@ -84,8 +79,24 @@ button {
   padding: 3px 5px;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
+button.success {
+  border: none;
+  background-color: var(--green);
+  color: white;
+}
+
+button.danger {
+  border: none;
+  background-color: var(--pink);
+  color: white;
+}
+
 button .material-icons {
-  margin-right: 5px;
+  font-size: 1.1em;
 }
 
 input[type='checkbox']:checked + label {
@@ -127,29 +138,12 @@ input[type='checkbox']:checked + label {
   }
 }
 
-.danger {
+input.danger {
   border: 1px solid red;
 }
 
 p.feedback {
   color: red;
   margin: 5px 0 0 0;
-}
-
-.sidebar {
-  width: 25%;
-}
-
-.sidebar ul {
-  margin-bottom: 15px;
-}
-
-.sidebar li {
-  list-style-type: none;
-}
-
-.sidebar li:hover {
-  cursor: pointer;
-  text-decoration: underline;
 }
 </style>

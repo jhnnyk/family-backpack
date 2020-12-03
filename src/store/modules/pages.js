@@ -1,21 +1,28 @@
+import firebase from 'firebase/app';
 import { firestoreAction } from 'vuexfire';
 import { db } from '../../firebase';
 
 const state = {
   pages: [],
   childsPages: [],
+  pageInvites: [],
+  collabPages: [],
   selectedPage: null
 };
 
 const getters = {
   userCanEdit: (state, getters, rootState) => {
     if (state.selectedPage) {
-      // must be a parent to edit Daily Chore pages or be the page owner of a normal page
       return (
+        // must be a parent to edit Daily Chore pages
         (getters.currentUserIsParent &&
           state.selectedPage.type === 'daily-chores') ||
+        // or be the page owner of a normal page
         (state.selectedPage.type !== 'daily-chores' &&
-          state.selectedPage.owner === rootState.users.user.id)
+          state.selectedPage.owner === rootState.users.user.id) ||
+        // or be a collaborator on a normal page
+        (state.selectedPage.type !== 'daily-chores' &&
+          state.selectedPage.collaborators.includes(rootState.users.user.email))
       );
     } else {
       return false;
@@ -57,12 +64,61 @@ const actions = {
     );
   }),
 
+  setPageInvitesRef: firestoreAction(context => {
+    context.bindFirestoreRef(
+      'pageInvites',
+      db
+        .collection('pages')
+        .where('invites', 'array-contains', context.rootState.users.user.email),
+      {
+        wait: true,
+        serialize: doc => {
+          return { id: doc.id, ...doc.data() };
+        }
+      }
+    );
+  }),
+
+  setCollabPagesRef: firestoreAction(context => {
+    context.bindFirestoreRef(
+      'collabPages',
+      db
+        .collection('pages')
+        .where(
+          'collaborators',
+          'array-contains',
+          context.rootState.users.user.email
+        ),
+      {
+        wait: true,
+        serialize: doc => {
+          return { id: doc.id, ...doc.data() };
+        }
+      }
+    );
+  }),
+
+  setCurrentPageRef: firestoreAction((context, page) => {
+    context.bindFirestoreRef(
+      'selectedPage',
+      db.collection('pages').doc(page.id),
+      {
+        wait: true,
+        serialize: doc => {
+          return { id: doc.id, ...doc.data() };
+        }
+      }
+    );
+  }),
+
   createNewPage: ({ rootState }, newPage) => {
     try {
       db.collection('pages').add({
         owner: rootState.users.user.id,
         title: newPage.title,
-        type: newPage.type
+        type: newPage.type,
+        invites: [],
+        collaborators: []
       });
     } catch (error) {
       console.log(error);
@@ -81,8 +137,8 @@ const actions = {
     }
   },
 
-  selectPage: async ({ dispatch, commit }, page) => {
-    await commit('selectPage', page);
+  selectPage: async ({ dispatch }, page) => {
+    await dispatch('setCurrentPageRef', page);
     dispatch('setTasksRef', page);
   },
 
@@ -115,6 +171,73 @@ const actions = {
         .doc(state.selectedPage.id)
         .update({
           title: newTitle
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  inviteCollaborator: (context, email) => {
+    try {
+      db.collection('pages')
+        .doc(state.selectedPage.id)
+        .update({
+          invites: firebase.firestore.FieldValue.arrayUnion(email)
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  acceptInvite: (context, page) => {
+    try {
+      // remove user from invites array
+      context.dispatch('declineInvite', page);
+      // add user to collaborators array
+      db.collection('pages')
+        .doc(page.id)
+        .update({
+          collaborators: firebase.firestore.FieldValue.arrayUnion(
+            context.rootState.users.user.email
+          )
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  declineInvite: (context, page) => {
+    try {
+      db.collection('pages')
+        .doc(page.id)
+        .update({
+          invites: firebase.firestore.FieldValue.arrayRemove(
+            context.rootState.users.user.email
+          )
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  removeInvite: (context, email) => {
+    try {
+      db.collection('pages')
+        .doc(context.rootState.pages.selectedPage.id)
+        .update({
+          invites: firebase.firestore.FieldValue.arrayRemove(email)
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  removeCollaborator: (context, email) => {
+    try {
+      db.collection('pages')
+        .doc(context.rootState.pages.selectedPage.id)
+        .update({
+          collaborators: firebase.firestore.FieldValue.arrayRemove(email)
         });
     } catch (error) {
       console.log(error);

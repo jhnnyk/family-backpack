@@ -10,12 +10,12 @@ const getters = {};
 const mutations = {};
 
 const actions = {
-  setTasksRef: firestoreAction(context => {
+  setTasksRef: firestoreAction((context, page) => {
     context.bindFirestoreRef(
       'pageTasks',
       db
         .collection('pages')
-        .doc(context.rootState.pages.selectedPage.id)
+        .doc(page.id)
         .collection('tasks')
         .orderBy('sortOrder'),
       {

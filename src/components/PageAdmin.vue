@@ -13,56 +13,26 @@
         close
       </i>
 
-      <div class="title-setting">
-        Title:
-        <div v-if="!editingPageTitle">
-          <strong>{{ selectedPage.title }}</strong>
-          <i class="material-icons" @click="editPageTitle">edit</i>
-        </div>
-
-        <div v-if="editingPageTitle">
-          <input type="text" v-model="selectedPage.title" />
-          <i class="material-icons save" @click="savePageTitle">done</i>
-          <i class="material-icons cancel" @click="cancelEditPageTitle">undo</i>
-        </div>
-      </div>
+      <EditPageTitle />
+      <PageCollaboration />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { store } from '../store/store';
+import EditPageTitle from '../components/page-settings/EditPageTitle';
+import PageCollaboration from '../components/page-settings/PageCollaboration';
 
 export default {
   name: 'PageAdmin',
+  components: {
+    EditPageTitle,
+    PageCollaboration
+  },
   data() {
     return {
-      showPageSettings: false,
-      editingPageTitle: false,
-      pageTitleCache: ''
+      showPageSettings: false
     };
-  },
-  computed: {
-    ...mapState({
-      selectedPage: state => state.pages.selectedPage
-    })
-  },
-  methods: {
-    editPageTitle() {
-      this.pageTitleCache = this.selectedPage.title;
-      this.editingPageTitle = true;
-    },
-
-    cancelEditPageTitle() {
-      this.selectedPage.title = this.pageTitleCache;
-      this.editingPageTitle = false;
-    },
-
-    savePageTitle() {
-      store.dispatch('updatePageTitle', this.selectedPage.title);
-      this.editingPageTitle = false;
-    }
   }
 };
 </script>
@@ -95,22 +65,5 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-}
-
-.title-setting .material-icons {
-  font-size: 0.8em;
-  padding-left: 3px;
-}
-
-.title-setting div {
-  display: inline;
-}
-
-.save {
-  color: var(--green);
-}
-
-.cancel {
-  color: var(--pink);
 }
 </style>

@@ -93,7 +93,11 @@ export default {
   padding-left: 3vw;
 }
 
-.task-list li {
+.page-content h1 {
+  margin-bottom: 10px;
+}
+
+.page-content .task-list li {
   list-style-type: none;
 }
 </style>
