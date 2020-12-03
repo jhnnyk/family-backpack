@@ -98,6 +98,19 @@ const actions = {
     );
   }),
 
+  setCurrentPageRef: firestoreAction((context, page) => {
+    context.bindFirestoreRef(
+      'selectedPage',
+      db.collection('pages').doc(page.id),
+      {
+        wait: true,
+        serialize: doc => {
+          return { id: doc.id, ...doc.data() };
+        }
+      }
+    );
+  }),
+
   createNewPage: ({ rootState }, newPage) => {
     try {
       db.collection('pages').add({
@@ -124,8 +137,8 @@ const actions = {
     }
   },
 
-  selectPage: async ({ dispatch, commit }, page) => {
-    await commit('selectPage', page);
+  selectPage: async ({ dispatch }, page) => {
+    await dispatch('setCurrentPageRef', page);
     dispatch('setTasksRef', page);
   },
 
