@@ -11,6 +11,7 @@
     <ul>
       <li v-for="(user, index) in invitedUsers" :key="index">
         {{ user }}
+        <button class="danger" @click="removeInvite(user)">remove</button>
       </li>
     </ul>
 
@@ -74,6 +75,10 @@ export default {
       }
 
       this.loading = false;
+    },
+
+    removeInvite(email) {
+      store.dispatch('removeInvite', email);
     }
   }
 };

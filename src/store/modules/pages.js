@@ -205,6 +205,18 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  removeInvite: (context, email) => {
+    try {
+      db.collection('pages')
+        .doc(context.rootState.pages.selectedPage.id)
+        .update({
+          invites: firebase.firestore.FieldValue.arrayRemove(email)
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
