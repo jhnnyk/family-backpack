@@ -217,6 +217,18 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  removeCollaborator: (context, email) => {
+    try {
+      db.collection('pages')
+        .doc(context.rootState.pages.selectedPage.id)
+        .update({
+          collaborators: firebase.firestore.FieldValue.arrayRemove(email)
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

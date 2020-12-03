@@ -4,6 +4,9 @@
     <ul>
       <li v-for="user in collaborators" :key="user">
         {{ user }}
+        <button class="danger" @click="removeCollaborator(user)">
+          <i class="material-icons">remove_circle</i>
+        </button>
       </li>
     </ul>
 
@@ -11,7 +14,9 @@
     <ul>
       <li v-for="(user, index) in invitedUsers" :key="index">
         {{ user }}
-        <button class="danger" @click="removeInvite(user)">remove</button>
+        <button class="danger" @click="removeInvite(user)">
+          <i class="material-icons">remove_circle</i>
+        </button>
       </li>
     </ul>
 
@@ -79,6 +84,10 @@ export default {
 
     removeInvite(email) {
       store.dispatch('removeInvite', email);
+    },
+
+    removeCollaborator(email) {
+      store.dispatch('removeCollaborator', email);
     }
   }
 };
