@@ -138,7 +138,7 @@ const actions = {
   },
 
   selectPage: async ({ dispatch }, page) => {
-    await dispatch('setCurrentPageRef', page);
+    dispatch('setCurrentPageRef', page);
     dispatch('setTasksRef', page);
   },
 
